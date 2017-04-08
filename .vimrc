@@ -7,7 +7,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'wellsjo/wellsokai.vim'
-Plugin 'bigfish/vim-js-context-coloring'
+" Plugin 'bigfish/vim-js-context-coloring'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'bling/vim-airline'
@@ -52,3 +52,5 @@ hi Normal ctermbg=none
 let g:airline_powerline_fonts = 1
 
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
+
+set backspace=start,eol,indent
