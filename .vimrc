@@ -5,13 +5,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'wellsjo/wellsokai.vim'
 " Plugin 'bigfish/vim-js-context-coloring'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'bling/vim-airline'
-Plugin 'rking/ag.vim'
+"Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plugin 'junegunn/fzf.vim'
+"Plugin 'bling/vim-airline'
+"Plugin 'rking/ag.vim'
 Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
@@ -49,7 +49,7 @@ colorscheme wells-colors
 
 hi Normal ctermbg=none
 
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 
