@@ -8,7 +8,7 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'wellsjo/wellsokai.vim'
 " Plugin 'bigfish/vim-js-context-coloring'
-"Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plugin 'junegunn/fzf.vim'
 "Plugin 'bling/vim-airline'
 "Plugin 'rking/ag.vim'
