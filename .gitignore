@@ -1,5 +1,6 @@
 *
 !.gitignore
+!.zshrc
 !.vimrc
 !.bashrc
 !.vim/colors/wells-colors.vim
