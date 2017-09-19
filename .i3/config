@@ -171,12 +171,12 @@ bindsym $mod+r mode "resize"
 #bindsym XF86AudioPlay exec
 #bindsym XF86AudioNext exec
 # bindsym XF86AudioMute exec pulseaudio-ctl mute
-bindsym $mod+Pause exec pactl set-sink-volume 2 +5%
+bindsym $mod+Pause exec pactl set-sink-volume 1 +5%
 bindsym $mod+Scroll_Lock exec pactl -- set-sink-volume 2 -5%
 
 # Extra keys to control volume
-bindsym $mod+plus exec pactl set-sink-volume 2 +5%
-bindsym $mod+minus exec pactl -- set-sink-volume 2 -5%
+bindsym $mod+plus exec pactl set-sink-volume 1 +5%
+bindsym $mod+minus exec pactl -- set-sink-volume 1 -5%
 
 # Print screen
 bindsym Print exec scrot -q 80 '%Y_%m_%d_%H%M%S_$wx$h.png' -e 'mv $f ~/images/'
