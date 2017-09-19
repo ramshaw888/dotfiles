@@ -125,5 +125,6 @@ alias devn='cd ~/Code/www'
 alias deva='cd ~/Code/admin'
 alias devapi='cd ~/Code/api'
 alias devnet='cd ~/Code/dot-net'
+alias ap='arc patch --nobranch'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
