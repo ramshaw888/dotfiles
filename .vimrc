@@ -5,7 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'wellsjo/wellsokai.vim'
 " Plugin 'bigfish/vim-js-context-coloring'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
