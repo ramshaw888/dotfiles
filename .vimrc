@@ -13,6 +13,9 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plugin 'bling/vim-airline'
 "Plugin 'rking/ag.vim'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'nvie/vim-flake8'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'editorconfig/editorconfig-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -54,3 +57,7 @@ hi Normal ctermbg=none
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 
 set backspace=start,eol,indent
+
+"let g:formatdef_flake8= "'yapf'"
+let g:formatter_yapf_style='chromium'
+let g:formatters_python = ['yapf']
