@@ -1,7 +1,11 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-export GIT_EDITOR=vim
+export VISUAL='nvim'
+export EDITOR="$VISUAL"
+export GIT_EDITOR="$VISUAL"
+alias vim="$VISUAL"
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -113,18 +117,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:/opt/deadbeef/bin:/home/aramshaw/phabricator/arcanist/bin
-
 alias gs='git status'
 alias gd='git diff'
 alias gc='git checkout'
 alias gl='git log'
-alias gsb='git show-branch internal-stg origin/master'
 alias gamend='git add --all; git commit --amend'
-alias devn='cd ~/Code/www'
-alias deva='cd ~/Code/admin'
-alias devapi='cd ~/Code/api'
-alias devnet='cd ~/Code/dot-net'
-alias ap='arc patch --nobranch'
+alias dev='cd ~/code'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source /usr/local/bin/virtualenvwrapper.sh
