@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'wellsjo/wellsokai.vim'
+Plugin 'nphoff/wells-colorscheme.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nvie/vim-flake8'
