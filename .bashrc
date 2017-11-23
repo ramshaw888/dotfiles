@@ -124,4 +124,6 @@ alias gl='git log'
 alias gamend='git add --all; git commit --amend'
 alias dev='cd ~/code'
 
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
