@@ -117,12 +117,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
 alias gs='git status'
 alias gd='git diff'
 alias gc='git checkout'
 alias gl='git log'
 alias gamend='git add --all; git commit --amend'
 alias dev='cd ~/code'
+alias vi='vim'
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   source /usr/local/bin/virtualenvwrapper.sh
