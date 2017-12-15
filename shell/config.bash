@@ -87,8 +87,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases]; then
+    . ~/.aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -106,13 +106,6 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-alias gs='git status'
-alias gd='git diff'
-alias gc='git checkout'
-alias gl='git log'
-alias gamend='git add --all; git commit --amend'
-alias dev='cd ~/code'
-alias vi='vim'
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
   source /usr/local/bin/virtualenvwrapper.sh
