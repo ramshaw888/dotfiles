@@ -2,10 +2,6 @@ for config in $HOME/.shell/*.(zsh|sh); do
   source $config
 done
 
-if [[ -e $HOME/.shell/aliases ]]; then
-  source $HOME/.shell/aliases
-fi
-
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
