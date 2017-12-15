@@ -1,12 +1,1 @@
-*
-!.gitignore
-!.zshrc
-!.vimrc
-!.bashrc
-!.bash_profile
-!.vim/colors/wells-colors.vim
-!.vim/bundle/Vundle.vim
-!README.md
-!.i3/
-!.i3/*
-!.i3status.conf
+
