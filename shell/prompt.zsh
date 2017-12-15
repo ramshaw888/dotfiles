@@ -14,5 +14,5 @@ function git_prompt() {
 }
 
 PROMPT='%{$fg_bold[red]%}%n%{$reset_color%} at %{$fg_bold[yellow]%}$(hostname)%{$reset_color%} in %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt)
-$(virtualenv_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )$ '
+$(virtualenv_info)%(?,,%{${fg_bold[white]}%}%{$reset_color%} )$ '
 RPROMPT=''
