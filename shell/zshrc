@@ -8,3 +8,5 @@ zmodload -i zsh/complist
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
+
+cd ~/code
