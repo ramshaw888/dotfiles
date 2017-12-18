@@ -13,11 +13,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'nphoff/wells-colorscheme.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nvie/vim-flake8'
-Plugin 'Chiel92/vim-autoformat'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'rking/ag.vim'
+Plugin 'keith/Swift.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -40,7 +41,6 @@ set hidden
 nnoremap <Tab> <C-^><CR>
 
 nmap <C-p> :FZF ~/code<CR>
-map <space> :Ag<CR>
 
 " makes webpack livereload work
 :set backupcopy=yes
