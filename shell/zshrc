@@ -2,6 +2,9 @@ for config in $HOME/.shell/*.(zsh|sh); do
   source $config
 done
 
+autoload -U compinit && compinit
+zmodload -i zsh/complist
+
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
