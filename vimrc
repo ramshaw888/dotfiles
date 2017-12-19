@@ -19,6 +19,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'rking/ag.vim'
 Plugin 'keith/Swift.vim'
+Plugin 'jooize/vim-colemak'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
