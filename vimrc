@@ -68,6 +68,8 @@ set clipboard=unnamed
     nnoremap n j|xnoremap n j|onoremap n j|
     nnoremap e k|xnoremap e k|onoremap e k|
     nnoremap i l|xnoremap i l|onoremap i l|
+
+    nnoremap k n|xnoremap k n|onoremap k n|
 " }}}
 " Words forward/backward {{{
     " l/L = back word/WORD
