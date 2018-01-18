@@ -33,6 +33,11 @@ set t_Co=256
 :set expandtab
 :set list
 
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+
 nnoremap <C-y> "+y
 vnoremap <C-y> "+y
 nnoremap <C-p> "+gP
