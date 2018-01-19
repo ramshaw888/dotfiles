@@ -21,7 +21,7 @@ function vim {
   if [ ! -d $HOME/.config/nvim ]; then
     mkdir $HOME/.config/nvim
   fi
-  ln -s `pwd`/vimrc $HOME/.config/nvim/init.vim
+  ln -s `pwd`/vim/vimrc $HOME/.config/nvim/init.vim
 }
 
 case $1 in
