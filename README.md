@@ -1,3 +1,9 @@
+Installs
+--------
+`./install.sh vim`
+`./install.sh shell`
+
+
 Backups
 -------
 
