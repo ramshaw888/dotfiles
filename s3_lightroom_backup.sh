@@ -72,6 +72,6 @@ case $1 in
     clean $2 $3
     ;;
   *)
-    echo "aws-backup: sync, check, clean"
+    echo "s3-lightroom-backup: sync, check, clean"
     ;;
 esac
