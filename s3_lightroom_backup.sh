@@ -26,7 +26,7 @@ function inc {
     ((count++));
     echo -ne "\r$count";
   done
-  echo "\nDone"
+  echo
 }
 
 function check {
