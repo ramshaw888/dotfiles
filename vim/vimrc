@@ -19,6 +19,8 @@ set list
 " makes webpack livereload work
 set backupcopy=yes
 
+" Hides current file when opening explorer
+set hidden
 
 " Clipboard
 nnoremap <C-y> "+y
