@@ -15,9 +15,10 @@ function sync {
 
   aws s3 sync $SOURCE $TARGET $DRY \
     --exclude="*.DS_Store" \
-    --exclude="*Backups" \
+    --exclude="Backups*" \
     --exclude="Lightroom*" \
-    --exclude="*.db*"
+    --exclude="*.db*" \
+    --include="Lightroom Catalog.lrcat"
 }
 
 function inc {
@@ -38,9 +39,10 @@ function check {
   count=0
   aws s3 sync $SOURCE $TARGET $DRY \
     --exclude="*.DS_Store" \
-    --exclude="*Backups" \
+    --exclude="Backups*" \
     --exclude="Lightroom*" \
-    --exclude="*.db*" | inc
+    --exclude="*.db*" \
+    --include="Lightroom\ Catalog.lrcat" | inc
 }
 
 function clean {
@@ -61,6 +63,31 @@ function clean {
 }
 
 
+function clean_local {
+  # aws cli leaves temp files when the download fails.
+
+  TARGET=$1
+
+  echo "Removing Dingleberries"
+
+  fls=$(find "$TARGET" -type f)
+
+  IFS=$'\n'
+  for f in $fls
+  do
+    if [[ $f =~ .*\.[a-zA-Z0-9]{8}$ ]]
+    then
+      if [ "$2" == "--live" ]
+      then
+        echo "delete: $f"
+        rm $f
+      else
+        echo "(dryrun) delete: $f"
+      fi
+    fi
+  done
+}
+
 case $1 in
   "sync")
     sync $2 $3 $4
@@ -70,6 +97,9 @@ case $1 in
     ;;
   "clean")
     clean $2 $3
+    ;;
+  "clean_local")
+    clean_local $2 $3
     ;;
   *)
     echo "s3-lightroom-backup: sync, check, clean"
