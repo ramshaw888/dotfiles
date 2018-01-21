@@ -23,6 +23,10 @@ function vim {
   ln -s `pwd`/vim/vimrc $HOME/.config/nvim/init.vim
 }
 
+function less {
+  lesskey -o $HOME/.less lesskey
+}
+
 case $1 in
   "shell")
     shell
@@ -30,7 +34,10 @@ case $1 in
   "vim")
     vim
     ;;
+  "less")
+    less
+    ;;
   *)
-    echo "install vim, shell"
+    echo "install vim, shell, less"
     ;;
 esac
