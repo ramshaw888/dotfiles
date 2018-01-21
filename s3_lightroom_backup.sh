@@ -46,20 +46,29 @@ function check {
 }
 
 function clean {
+  # aws cli leaves temp files when the download fails,
+  # sometimes you accidentally upload them back to S3
+
   TARGET=$1
-  DRY="--dryrun"
+  echo "Removing Dingleberries files"
 
-  if [ "$2" == "--live" ]
-  then
-    DRY=""
-  fi
-
-  echo "Removing .DS_Store files"
-
-  aws s3 rm $TARGET $DRY \
+  aws s3 rm $TARGET --dryrun \
   --recursive \
   --exclude="*" \
-  --include="*.DS_Store"
+  --include="*.DS_Store" \
+  --include="*.*.*" | while read -r line;
+    do
+      if [[ $line =~ .*\.[a-zA-Z0-9]{8}$ ]]
+      then
+        f=$(echo $line | sed -e 's/(dryrun)\ delete:\ //g')
+        if [ "$2" == "--live" ]
+        then
+          aws s3 rm "$f"
+        else
+          echo "$line"
+        fi
+      fi
+    done
 }
 
 
