@@ -30,7 +30,7 @@ vnoremap <C-p> "+gP
 
 nnoremap <Tab> <C-^><CR>
 
-nmap <C-p> :FZF ~/code<CR>
+nmap <C-p> :FZF .<CR>
 
 syntax enable
 
