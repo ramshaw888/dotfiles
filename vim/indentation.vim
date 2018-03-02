@@ -3,6 +3,7 @@ au BufNewFile,BufRead *.py
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
     \ set textwidth=79 |
+    \ set colorcolumn=79 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
