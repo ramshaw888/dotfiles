@@ -40,3 +40,8 @@ nnoremap <C-W>h <C-W>h|xnoremap <C-W>h <C-W>h|
 nnoremap <C-W>n <C-W>j|xnoremap <C-W>n <C-W>j|
 nnoremap <C-W>e <C-W>k|xnoremap <C-W>e <C-W>k|
 nnoremap <C-W>i <C-W>l|xnoremap <C-W>i <C-W>l|
+
+map <leader>g :YcmCompleter GoToDefinition<CR>
+map <leader>p :YcmCompleter GoToDeclaration<CR>
+map <leader>f :YcmCompleter GoToReferences<CR>
+map <leader>d :YcmCompleter GetDoc<CR>
