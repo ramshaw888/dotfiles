@@ -5,6 +5,7 @@ endfor
 
 let g:python2_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:ycm_python_binary_path = 'python'
 
 set t_Co=256
 set number
