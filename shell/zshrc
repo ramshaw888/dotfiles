@@ -1,3 +1,5 @@
+export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
+
 for config in $HOME/.shell/*.(zsh|sh); do
   source $config
 done
@@ -8,8 +10,5 @@ zmodload -i zsh/complist
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
-
-export PATH=~/Library/Python/3.6/bin:$PATH
-export PATH=~/Library/Python/2.7/bin:$PATH
 
 cd ~/code
