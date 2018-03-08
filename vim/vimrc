@@ -1,11 +1,23 @@
-let vimrcdir = "$HOME/code/dotfiles/vim/"
+let vimrcdir = '$HOME/code/dotfiles/vim/'
 for s:script_name in split(globpath(vimrcdir, '*.vim'))
-    exec ":source " . s:script_name
+    exec ':source ' . s:script_name
 endfor
 
 let g:python2_host_prog = 'python'
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:ycm_python_binary_path = 'python'
+
+" Use current repos tox default virtualenv for ycm if it is found
+let git_dir=system('git rev-parse --show-toplevel')
+" Remove the '^@' from the end
+let git_dir=substitute(git_dir, '.$', '', '')
+let invalid_git_dir=matchstr(git_dir, '^fatal:.*')
+
+if (empty(invalid_git_dir))
+    let g:ycm_python_binary_path = (git_dir . '/.tox/default/bin/python')
+else
+    let g:ycm_python_binary_path = 'python'
+endif
+
 
 set t_Co=256
 set number
