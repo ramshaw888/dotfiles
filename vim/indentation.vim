@@ -8,7 +8,7 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
-au BufNewFile,BufRead *.js, *.html, *.css
+au BufNewFile,BufRead *.js
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
