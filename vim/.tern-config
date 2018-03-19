@@ -1,0 +1,19 @@
+{
+  "libs":[
+    "browser",
+    "ecma5",
+    "ecma6",
+    "jquery"
+  ],
+  "plugins": {
+    "jsx": {},
+    "complete_strings": {},
+    "doc_comment": {},
+    "es_modules": {},
+    "modules": {},
+    "node":{},
+    "node_resolve":{},
+    "requirejs": {},
+    "webpack": {}
+  }
+}

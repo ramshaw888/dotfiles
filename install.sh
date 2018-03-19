@@ -37,6 +37,12 @@ function less {
   lesskey -o $HOME/.less lesskey
 }
 
+function tern {
+  npm i -g tern-jsx
+  rm $HOME/.tern-config
+  ln -s `pwd`/vim/.tern-config $HOME/.tern-config
+}
+
 case $1 in
   "shell")
     shell
@@ -47,7 +53,10 @@ case $1 in
   "less")
     less
     ;;
+  "tern")
+    tern
+    ;;
   *)
-    echo "install vim, shell, less"
+    echo "install vim, shell, less, tern"
     ;;
 esac
