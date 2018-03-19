@@ -1,3 +1,6 @@
+let vimrcdir = '$HOME/code/dotfiles/vim/'
+exec ':source ' . vimrcdir . 'gitdir.vim'
+
 :command WQ wq
 :command Wq wq
 :command W w
@@ -5,5 +8,10 @@
 
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-command! FZF call execute 'FZF ~'
+let git_dir = GitDir()
+if (!empty(git_dir))
+    let fzf_command = 'nmap <C-p> :FZF ' . git_dir . '<CR>'
+else
+    let fzf_command = 'nmap <C-p> :FZF .<CR>'
+endif
+execute fzf_command
