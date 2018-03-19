@@ -16,6 +16,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'rking/ag.vim'
 Plugin 'keith/Swift.vim'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 filetype plugin indent on
