@@ -30,14 +30,6 @@ set backupcopy=yes
 " Hides current file when opening explorer
 set hidden
 
-" Clipboard
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-nnoremap <C-p> "+gP
-vnoremap <C-p> "+gP
-
-nnoremap <Tab> <C-^><CR>
-
 syntax enable
 
 colorscheme wells-colors
