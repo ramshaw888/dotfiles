@@ -11,8 +11,8 @@ bindkey -M vicmd 'b' vi-backward-word
 bindkey -M vicmd 'k' vi-forward-word
 
 # fzf fuzzy history search
-fh() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+fuzzy_history() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
-zle -N fh
-bindkey '^r' fh
+zle -N fuzzy_history
+bindkey '^p' fuzzy_history
