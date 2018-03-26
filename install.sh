@@ -43,6 +43,11 @@ function tern {
   ln -s `pwd`/vim/.tern-config $HOME/.tern-config
 }
 
+function gpg {
+  echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+  gpgconf --kill gpg-agent
+}
+
 case $1 in
   "shell")
     shell
@@ -55,6 +60,9 @@ case $1 in
     ;;
   "tern")
     tern
+    ;;
+  "gpg")
+    gpg
     ;;
   *)
     echo "install vim, shell, less, tern"

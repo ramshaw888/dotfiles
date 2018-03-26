@@ -2,3 +2,5 @@ bash
 zsh
 fzf
 less
+gpg
+pinentry-mac
