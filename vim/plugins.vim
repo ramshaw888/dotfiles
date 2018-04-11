@@ -1,27 +1,30 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=/usr/local/opt/fzf
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'nphoff/wells-colorscheme.vim'
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'nvie/vim-flake8'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'rking/ag.vim'
-Plugin 'keith/Swift.vim'
-Plugin 'leafgarland/typescript-vim'
+Plug 'tpope/vim-fugitive', { 'on' : [] }
+Plug 'Valloric/YouCompleteMe'
+Plug 'nphoff/wells-colorscheme.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'nvie/vim-flake8'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'rking/ag.vim'
+Plug 'keith/Swift.vim', { 'for': 'swift' }
+Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsx'] }
 
-call vundle#end()
+call plug#end()
+
 filetype plugin indent on
 
-" turns vim-airline on
-:set laststatus=2
 
-let g:airline_powerline_fonts = 1
+command! Gstatus call LazyLoadFugitive('Gstatus')
+command! Gdiff call LazyLoadFugitive('Gdiff')
+command! Glog call LazyLoadFugitive('Glog')
+command! Gblame call LazyLoadFugitive('Gblame')
+
+function! LazyLoadFugitive(cmd)
+  call plug#load('vim-fugitive')
+  call fugitive#detect(expand('%:p'))
+  exe a:cmd
+endfunction
