@@ -9,7 +9,7 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " Use current repos tox default virtualenv for ycm if it is found
 let git_dir = GitDir()
 if (!empty(git_dir))
-    let g:ycm_python_binary_path = (git_dir . '/.tox/default/bin/python')
+    let g:ycm_python_binary_path = (git_dir . '/.tox/runserver/bin/python')
 else
     let g:ycm_python_binary_path = 'python'
 endif
