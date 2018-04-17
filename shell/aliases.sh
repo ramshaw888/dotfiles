@@ -11,3 +11,6 @@ alias gl='git log'
 alias gamend='git add --all; git commit --amend'
 alias dev='cd ~/code'
 alias vi='vim'
+
+alias python='/usr/local/bin/python3'
+alias pip='/usr/local/bin/pip3'
