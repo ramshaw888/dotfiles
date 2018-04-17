@@ -10,3 +10,5 @@ export PATH=~/Library/Python/2.7/bin:$PATH
 export PATH=~/Library/Python/3.6/bin:$PATH
 
 cd ~/code
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

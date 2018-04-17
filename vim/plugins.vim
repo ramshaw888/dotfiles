@@ -1,7 +1,12 @@
-set nocompatible
-filetype off
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-call plug#begin('~/.vim/plugged')
+set nocompatible
+
+call plug#begin('~/.config/nvim/plugins')
 
 Plug 'tpope/vim-fugitive', { 'on' : [] }
 Plug 'Valloric/YouCompleteMe'
@@ -14,8 +19,6 @@ Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsx'] }
 
 call plug#end()
-
-filetype plugin indent on
 
 
 command! Gstatus call LazyLoadFugitive('Gstatus')
