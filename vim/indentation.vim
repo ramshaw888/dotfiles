@@ -12,3 +12,6 @@ au BufNewFile,BufRead *.js
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
+
+" Dont auto wrap
+set formatoptions-=t
