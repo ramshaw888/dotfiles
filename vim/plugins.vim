@@ -8,7 +8,7 @@ set nocompatible
 
 call plug#begin('~/.config/nvim/plugins')
 
-Plug 'tpope/vim-fugitive', { 'on' : [] }
+Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
 Plug 'nphoff/wells-colorscheme.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -19,15 +19,3 @@ Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsx'] }
 
 call plug#end()
-
-
-command! Gstatus call LazyLoadFugitive('Gstatus')
-command! Gdiff call LazyLoadFugitive('Gdiff')
-command! Glog call LazyLoadFugitive('Glog')
-command! Gblame call LazyLoadFugitive('Gblame')
-
-function! LazyLoadFugitive(cmd)
-  call plug#load('vim-fugitive')
-  call fugitive#detect(expand('%:p'))
-  exe a:cmd
-endfunction
