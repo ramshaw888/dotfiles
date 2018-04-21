@@ -16,6 +16,6 @@ Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rking/ag.vim'
 Plug 'keith/Swift.vim', { 'for': 'swift' }
-Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsx'] }
+Plug 'leafgarland/typescript-vim',
 
 call plug#end()
