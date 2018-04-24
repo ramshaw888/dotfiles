@@ -32,6 +32,9 @@ shift + cmd - i : chunkc tiling::window --swap east
 
 # cmd - r : chunkc tiling::desktop --rotate 90
 
-# move focused container to workspace
-shift + cmd - 1 : chunkc tiling::window --send-to-monitor prev
-shift + cmd - 2 : chunkc tiling::window --send-to-monitor next
+shift + cmd - 1 : chunkc tiling::window --send-to-desktop 1
+shift + cmd - 2 : chunkc tiling::window --send-to-desktop 2
+shift + cmd - 3 : chunkc tiling::window --send-to-desktop 3
+shift + cmd - 4 : chunkc tiling::window --send-to-desktop 4
+shift + cmd - 5 : chunkc tiling::window --send-to-desktop 5
+shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6
