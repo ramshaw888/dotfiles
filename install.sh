@@ -49,6 +49,11 @@ function gpg_install {
   gpgconf --kill gpg-agent
 }
 
+function chunkwm_install {
+  ln -s `pwd`/chunkwmrc $HOME/.chunkwmrc
+}
+
+
 case $1 in
   "shell")
     shell_install
@@ -65,7 +70,10 @@ case $1 in
   "gpg")
     gpg_install
     ;;
+  "chunkwm")
+    chunkwm_install
+    ;;
   *)
-    echo "install vim, shell, less, tern"
+    echo "install vim, shell, less, tern, gpg, chunkwm"
     ;;
 esac
