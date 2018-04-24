@@ -50,7 +50,13 @@ function gpg_install {
 }
 
 function chunkwm_install {
+  rm $HOME/.chunkwmrc
   ln -s `pwd`/chunkwmrc $HOME/.chunkwmrc
+  rm $HOME/.skhdrc
+  ln -s `pwd`/skhdrc $HOME/.skhdrc
+  chmod +x $HOME/.chunkwmrc
+  brew services start crisidev/chunkwm/chunkwm
+  brew services start koekeishiya/formulae/skhd
 }
 
 
