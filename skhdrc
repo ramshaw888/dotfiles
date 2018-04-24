@@ -3,7 +3,7 @@
 
 shift + cmd - y : open -na '/Applications/Google Chrome.app'
 
-cmd - return : open -na /Applications/iTerm.app
+cmd - return : source $HOME/code/dotfiles/shell/functions.zsh; new_iterm
 
 # change focus between tiling / floating windows
 # shift + cmd - space : chunkc tiling::window --toggle float
