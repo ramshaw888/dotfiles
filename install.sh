@@ -50,6 +50,9 @@ function gpg_install {
 }
 
 function chunkwm_install {
+  brew tap crisidev/homebrew-chunkwm
+  brew install koekeishiya/formulae/skhd
+  brew install chunkwm
   rm $HOME/.chunkwmrc
   ln -s `pwd`/chunkwmrc $HOME/.chunkwmrc
   rm $HOME/.skhdrc
