@@ -25,9 +25,9 @@ cmd - i : chunkc tiling::window --focus east
 # cmd - n : chunkc tiling::window --focus next
 
 # move focused window
-shift + cmd - h : chunkc tiling::window --swap west
-shift + cmd - n : chunkc tiling::window --swap south
-shift + cmd - e : chunkc tiling::window --swap north
-shift + cmd - i : chunkc tiling::window --swap east
+alt + cmd - h : chunkc tiling::window --swap west
+alt + cmd - n : chunkc tiling::window --swap south
+alt + cmd - e : chunkc tiling::window --swap north
+alt + cmd - i : chunkc tiling::window --swap east
 
 # cmd - r : chunkc tiling::desktop --rotate 90
