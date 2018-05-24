@@ -62,6 +62,11 @@ function chunkwm_install {
   brew services start koekeishiya/formulae/skhd
 }
 
+function stop_chunkwm {
+  brew services stop crisidev/chunkwm/chunkwm
+  brew services stop koekeishiya/formulae/skhd
+}
+
 
 case $1 in
   "shell")
@@ -82,7 +87,10 @@ case $1 in
   "chunkwm")
     chunkwm_install
     ;;
+  "stop_chunkwm")
+    stop_chunkwm
+    ;;
   *)
-    echo "install vim, shell, less, tern, gpg, chunkwm"
+    echo "install vim, shell, less, tern, gpg, chunkwm, stop_chunkwm"
     ;;
 esac
