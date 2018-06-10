@@ -17,5 +17,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'rking/ag.vim'
 Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
