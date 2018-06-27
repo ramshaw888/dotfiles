@@ -5,6 +5,8 @@ done
 autoload -U compinit && compinit
 zmodload -i zsh/complist
 
+export GOPATH=$HOME/code/go
+
 cd ~/code
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
