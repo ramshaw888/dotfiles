@@ -23,3 +23,5 @@ else
     let fzf_command = 'nmap <C-p> :FZF .<CR>'
 endif
 execute fzf_command
+
+nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
