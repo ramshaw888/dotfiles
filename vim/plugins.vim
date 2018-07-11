@@ -12,9 +12,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
 Plug 'nphoff/wells-colorscheme.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'rking/ag.vim'
 Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
 Plug 'airblade/vim-gitgutter'

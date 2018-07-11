@@ -24,4 +24,14 @@ else
 endif
 execute fzf_command
 
+
+command! -bang -nargs=* Agg
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+
+nmap <Space> :Agg <CR>
+
 nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
