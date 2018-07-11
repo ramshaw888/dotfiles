@@ -16,3 +16,10 @@ fuzzy_history() {
 }
 zle -N fuzzy_history
 bindkey '^p' fuzzy_history
+
+file_search() {
+  print -z $( find * -type f | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+zle -N file_search
+bindkey '^f' file_search
