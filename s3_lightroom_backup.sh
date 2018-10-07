@@ -18,6 +18,7 @@ function sync {
     --exclude="Backups*" \
     --exclude="Lightroom*" \
     --exclude="*.db*" \
+    --exclude="Temp*" \
     --include="Lightroom Catalog.lrcat"
 }
 
