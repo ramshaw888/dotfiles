@@ -1,6 +1,14 @@
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export GIT_EDITOR="$VISUAL"
+export GOPATH=$HOME/code/go
+
+# All non golang repos in ~/code
+export CDPATH=.:$HOME/code
+
+# GOPATH stuff
+export CDPATH=$CDPATH:$GOPATH/src/github.com:$GOPATH/src/golang.org:$GOPATH/src
+
 alias vim="$VISUAL"
 
 alias ls='ls -GFh'
