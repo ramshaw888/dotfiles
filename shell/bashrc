@@ -1,1 +1,2 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f $HOME/.shell/nvm.sh ] && source $HOME/.shell/nvm.sh
