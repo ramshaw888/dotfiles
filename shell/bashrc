@@ -1,2 +1,5 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f $HOME/.shell/nvm.sh ] && source $HOME/.shell/nvm.sh
+
+for config in $HOME/.shell/*.sh; do
+  source $config
+done
