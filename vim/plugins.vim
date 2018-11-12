@@ -18,5 +18,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
 Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
