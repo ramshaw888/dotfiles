@@ -6,10 +6,9 @@ endif
 
 set nocompatible
 
+" These need to go before ale is loaded
 let g:ale_linters = {'go': ['gotype', 'gometalinter', 'gofmt', 'gobuild', 'goimports']}
 let g:ale_go_gobuild_options = '-i'
-
-set omnifunc=syntaxcomplete#Complete
 
 call plug#begin('~/.config/nvim/plugins')
 

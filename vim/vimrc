@@ -39,3 +39,5 @@ hi Normal ctermbg=none
 set backspace=start,eol,indent
 
 set clipboard=unnamed
+
+set omnifunc=syntaxcomplete#Complete
