@@ -44,4 +44,5 @@ nnoremap <C-W>i <C-W>l|xnoremap <C-W>i <C-W>l|
 map <leader>g :YcmCompleter GoToDefinition<CR>
 map <leader>p :YcmCompleter GoToDeclaration<CR>
 map <leader>f :YcmCompleter GoToReferences<CR>
+map <leader>w :YcmCompleter GoTo<CR>
 map <leader>d :YcmCompleter GetDoc<CR>
