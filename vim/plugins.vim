@@ -6,6 +6,11 @@ endif
 
 set nocompatible
 
+let g:ale_linters = {'go': ['gometalinter', 'gofmt', 'gobuild', 'goimports', 'remove_trailing_lines', 'trim_whitespace']}
+
+
+set omnifunc=syntaxcomplete#Complete
+
 call plug#begin('~/.config/nvim/plugins')
 
 Plug 'tpope/vim-fugitive'
@@ -19,5 +24,6 @@ Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'w0rp/ale'
 
 call plug#end()
