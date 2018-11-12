@@ -6,8 +6,8 @@ endif
 
 set nocompatible
 
-let g:ale_linters = {'go': ['gometalinter', 'gofmt', 'gobuild', 'goimports', 'remove_trailing_lines', 'trim_whitespace']}
-
+let g:ale_linters = {'go': ['gotype', 'gometalinter', 'gofmt', 'gobuild', 'goimports']}
+let g:ale_go_gobuild_options = '-i'
 
 set omnifunc=syntaxcomplete#Complete
 
