@@ -3,8 +3,10 @@ for s:script_name in split(globpath(vimrcdir, '*.vim'))
     exec ':source ' . s:script_name
 endfor
 
-let g:python2_host_prog = 'python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let pyenv_dir=system('pyenv root')
+let pyenv_dir=substitute(pyenv_dir, '.$', '', '')
+let g:python2_host_prog = (pyenv_dir . '/shims/python2')
+let g:python3_host_prog = (pyenv_dir . '/shims/python3')
 
 " Use current repos tox default virtualenv for ycm if it is found
 let git_dir = GitDir()

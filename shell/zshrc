@@ -8,3 +8,5 @@ zmodload -i zsh/complist
 cd ~/code
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$(pyenv root)/shims:$PATH"
