@@ -1,0 +1,62 @@
+" Up/down/left/right
+nnoremap h h
+nnoremap n j
+nnoremap e k
+nnoremap i l
+nnoremap k n
+
+xnoremap h h
+xnoremap n j
+xnoremap e k
+xnoremap i l
+xnoremap k n
+
+onoremap h h
+onoremap n j
+onoremap e k
+onoremap i l
+onoremap k n
+
+vnoremap h h
+vnoremap n j
+vnoremap e k
+vnoremap i l
+vnoremap k n
+
+" inSert/Replace/append
+nnoremap s i
+nnoremap S I
+
+xnoremap s i
+xnoremap S I
+
+onoremap s i
+onoremap S I
+
+" inneR text objects
+onoremap r i
+
+" Visual mode
+nnoremap ga gv
+" Make insert/add work also in visual line mode like in visual block mode
+xnoremap <silent> <expr> s (mode() =~# "[V]" ? "\<C-V>0o$I" : "I")
+xnoremap <silent> <expr> S (mode() =~# "[V]" ? "\<C-V>0o$I" : "I")
+xnoremap <silent> <expr> t (mode() =~# "[V]" ? "\<C-V>0o$A" : "A")
+xnoremap <silent> <expr> T (mode() =~# "[V]" ? "\<C-V>0o$A" : "A")
+
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+
+" Clipboard
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
+
+nnoremap <Tab> <C-^><CR>
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2

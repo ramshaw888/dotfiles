@@ -33,6 +33,11 @@ function vim_install {
   ln -s `pwd`/vim/vimrc $HOME/.config/nvim/init.vim
 }
 
+function xvim {
+  rm $HOME/.xvimrc
+  ln -s `pwd`/xvimrc $HOME/.xvimrc
+}
+
 function less_install {
   lesskey -o $HOME/.less lesskey
 }
@@ -90,7 +95,10 @@ case $1 in
   "stop_chunkwm")
     stop_chunkwm
     ;;
+  "xvim")
+    xvim
+    ;;
   *)
-    echo "install vim, shell, less, tern, gpg, chunkwm, stop_chunkwm"
+    echo "install vim, shell, less, tern, gpg, chunkwm, stop_chunkwm, xvim"
     ;;
 esac
