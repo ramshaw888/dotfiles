@@ -10,10 +10,10 @@ let g:python3_host_prog = (pyenv_dir . '/shims/python3')
 
 " Use current repos tox default virtualenv for ycm if it is found
 let git_dir = GitDir()
-if (!empty(git_dir))
+if (!empty(git_dir) && filereadable(git_dir . '/.tox/runserver/bin/python'))
     let g:ycm_python_binary_path = (git_dir . '/.tox/runserver/bin/python')
 else
-    let g:ycm_python_binary_path = 'python'
+    let g:ycm_python_binary_path = 'python3'
 endif
 
 set t_Co=256
