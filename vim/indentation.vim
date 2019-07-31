@@ -23,5 +23,7 @@ au BufNewFile,BufRead *.swift
     \ set autoindent |
     \ set fileformat=unix
 
+au BufNewFile,BufRead Jenkinsfile setf groovy
+
 " Dont auto wrap
 set formatoptions-=t
