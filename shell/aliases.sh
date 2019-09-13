@@ -5,6 +5,7 @@ export GOPATH=$HOME/code/go
 
 # All non golang repos in ~/code
 export CDPATH=.:$HOME/code
+export PIP_CACHE_DIR=$HOME/.cache/pip
 
 # GOPATH stuff
 export CDPATH=$CDPATH:$GOPATH/src/github.com:$GOPATH/src/golang.org:$GOPATH/src
