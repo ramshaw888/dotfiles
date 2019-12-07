@@ -1,3 +1,6 @@
+# YouCompleteMe requires dynamic python libaries
+export PYTHON_CONFIGURE_OPTS="--enable-framework"
+
 # Add pyenv to path FIRST, because subsequent configs may rely on it (e.g. virtualenvwrapper)
 export PATH="$(pyenv root)/shims:$PATH"
 
