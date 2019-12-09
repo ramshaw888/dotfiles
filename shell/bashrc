@@ -1,5 +1,0 @@
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-for config in $HOME/.shell/*.sh; do
-  source $config
-done
