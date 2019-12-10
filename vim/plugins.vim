@@ -24,5 +24,6 @@ Plug 'leafgarland/typescript-vim',
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'w0rp/ale'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
