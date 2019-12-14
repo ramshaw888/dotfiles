@@ -9,6 +9,10 @@ source "$HOME/.zsh/bindkey.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source "$HOME/.zsh/fzf.zsh"
 
+# macos default less is built without the lesskey options, instead a brew
+# version can be used. By default man uses /usr/bin/less.
+export MANPAGER=$(which less)
+
 # All non golang repos in ~/code
 export CDPATH=.:$HOME/code
 
