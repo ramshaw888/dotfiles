@@ -1,6 +1,3 @@
-let vimrcdir = '$HOME/code/dotfiles/vim/'
-exec ':source ' . vimrcdir . 'gitdir.vim'
-
 :command WQ wq
 :command Wq wq
 :command W w

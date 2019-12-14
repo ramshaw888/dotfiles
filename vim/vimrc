@@ -1,7 +1,10 @@
-let vimrcdir = '$HOME/code/dotfiles/vim/'
-for s:script_name in split(globpath(vimrcdir, '*.vim'))
-    exec ':source ' . s:script_name
-endfor
+let vimrcdir = '$HOME/.vim/'
+exec ':source ' . vimrcdir . 'colemak.vim'
+exec ':source ' . vimrcdir . 'gitdir.vim'
+exec ':source ' . vimrcdir . 'commands.vim'
+exec ':source ' . vimrcdir . 'gitgutter.vim'
+exec ':source ' . vimrcdir . 'indentation.vim'
+exec ':source ' . vimrcdir . 'plugins.vim'
 
 let pyenv_dir=system('pyenv root')
 let pyenv_dir=substitute(pyenv_dir, '.$', '', '')
@@ -34,7 +37,11 @@ set hidden
 
 syntax enable
 
-colorscheme wells-colors
+try
+  colorscheme wells-colors
+catch
+  echo "Failed to load colorscheme"
+endtry
 
 hi Normal ctermbg=none
 
