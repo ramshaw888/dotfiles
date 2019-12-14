@@ -7,7 +7,7 @@ bindkey '^p' fuzzy_history
 
 # CTRL-F file search
 file_search() {
-  print -z $( find * -type f | fzf +s --tac | sed 's/ *[0-9]* *//')
+  vim $( find * -type f | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 zle -N file_search
 bindkey '^f' file_search
