@@ -7,6 +7,7 @@ RUN apt-get install -y zsh
 RUN apt-get install -y neovim
 RUN apt-get install -y git
 RUN apt-get install -y curl
+RUN apt-get install -y jq
 WORKDIR /root
 RUN mkdir .config
 RUN git clone https://github.com/chriskempson/base16-shell.git .config/base16-shell
