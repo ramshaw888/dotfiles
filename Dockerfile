@@ -12,6 +12,14 @@ WORKDIR /root
 RUN mkdir .config
 RUN git clone https://github.com/chriskempson/base16-shell.git .config/base16-shell
 
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+# Install fzf into ~/.fzf, and use --bin install - by default the installation
+# is quite intrusive, The zsh configs for completion, bindings can be
+# sourced/included manually.
+RUN $HOME/.fzf/install --bin
+# Add symlink to prevent pollution of PATH.
+RUN ln -sf $HOME/.fzf/bin/fzf /usr/local/bin/fzf
+
 COPY zsh .zsh
 RUN ln -sf .zsh/zshrc .zshrc
 

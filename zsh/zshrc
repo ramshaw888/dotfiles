@@ -6,7 +6,6 @@ alias vim="$VISUAL"
 source "$HOME/.zsh/history.zsh"
 source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/bindkey.zsh"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source "$HOME/.zsh/fzf.zsh"
 
 # macos default less is built without the lesskey options, instead a brew

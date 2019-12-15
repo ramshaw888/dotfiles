@@ -15,7 +15,8 @@ call plug#begin('~/.config/nvim/plugins')
 Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
 Plug 'nphoff/wells-colorscheme.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" assume that fzf has already been installed
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
