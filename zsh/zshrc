@@ -50,4 +50,7 @@ RPROMPT=''
 autoload -U compinit && compinit
 zmodload -i zsh/complist
 
-cd ~/code
+if [ -d "$HOME/code" ]
+then
+  cd ~/code
+fi
