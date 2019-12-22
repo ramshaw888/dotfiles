@@ -8,13 +8,13 @@ exec ':source ' . vimrcdir . 'plugins.vim'
 
 let pyenv_dir=system('pyenv root')
 let pyenv_dir=substitute(pyenv_dir, '.$', '', '')
-let g:python_host_prog = substitute(system('which python2.7'), '.$', '', '')
-let g:python3_host_prog = substitute(system('which python3.8'), '.$', '', '')
+let g:python_host_prog = '$HOME/.config/py2_venv/bin/python'
+let g:python3_host_prog = '$HOME/.config/py3_venv/bin/python'
 
-" Use current repos tox default virtualenv for ycm if it is found
+" Use current repos virtualenv for ycm if it is found
 let git_dir = GitDir()
-if (!empty(git_dir) && filereadable(git_dir . '/.tox/runserver/bin/python'))
-    let g:ycm_python_binary_path = (git_dir . '/.tox/runserver/bin/python')
+if (!empty(git_dir) && filereadable(git_dir . '/.venv/bin/python'))
+    let g:ycm_python_binary_path = (git_dir . '/.venv/bin/python')
 else
     let g:ycm_python_binary_path = 'python'
 endif
