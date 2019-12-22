@@ -45,15 +45,6 @@ RUN . .config/py2_venv/bin/activate && pip install pynvim && deactivate
 RUN python3.8 -m virtualenv .config/py3_venv
 RUN . .config/py3_venv/bin/activate && pip install pynvim && deactivate
 
-#RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
-# Prefer symlink here instead of modifying path
-#RUN ln -sf $HOME/.pyenv/bin/pyenv /usr/local/bin/pyenv
-
-# Use pyenv without using it to install python - symlink in our ppa installed
-# binaries.
-#RUN mkdir -p $HOME/.pyenv/shims
-#RUN ln -sf /usr/bin/python3.8 $HOME/.pyenv/shims/python
-
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 # Install fzf into ~/.fzf, and use --bin install - by default the installation
 # is quite intrusive, The zsh configs for completion, bindings can be
