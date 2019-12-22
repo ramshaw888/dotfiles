@@ -66,4 +66,7 @@ RUN mkdir .config/nvim
 RUN ln -s $HOME/.vim/vimrc $HOME/.config/nvim/init.vim
 RUN vim +PlugInstall +qall
 
+RUN ln -s $(pwd)/gitignore_global $HOME/.gitignore_global
+RUN git config --global core.excludesfile $HOME/.gitignore_global
+
 cmd zsh
