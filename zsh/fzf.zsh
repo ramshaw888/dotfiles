@@ -7,6 +7,7 @@ source "$HOME/.fzf/shell/key-bindings.zsh"
 # CTRL-P fuzzy history search
 fuzzy_history() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+  zle accept-line
 }
 zle -N fuzzy_history
 bindkey '^p' fuzzy_history
