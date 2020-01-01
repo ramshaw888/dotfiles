@@ -21,3 +21,16 @@ file_search() {
 }
 zle -N file_search
 bindkey '^f' file_search
+
+# List all git repositories, and then cd into the selected one
+repo_cd() {
+  top_level_dirs=$( find $CODEDIR -type d -maxdepth 1 | while read dir; do [ -d "$dir/.git" ] && echo $dir ; done )
+  selected_dir=$( echo $top_level_dirs | fzf +s --tac )
+
+  if [[ ! -z $selected_dir ]]; then
+    cd $selected_dir
+    zle accept-line
+  fi
+}
+zle -N repo_cd
+bindkey '^y' repo_cd
