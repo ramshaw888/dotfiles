@@ -13,14 +13,14 @@ nnoremap <Tab> <C-^><CR>
 
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 
-let git_dir = GitDir()
-if (!empty(git_dir))
-    let fzf_command = 'nmap <C-p> :FZF ' . git_dir . '<CR>'
-else
-    let fzf_command = 'nmap <C-p> :FZF .<CR>'
-endif
-execute fzf_command
+function! s:fzfdir() abort
+  let command="ag -g . " . GitDirCdUp()
+  let opts = { 'source': command, 'options': ['--preview', 'head -n 100 {}'] }
+  call fzf#run(fzf#wrap('FZF', opts))
+endfunction
 
+command! FZ call s:fzfdir()
+nmap <C-f> :FZ<CR>
 
 command! -bang -nargs=* Agg
   \ call fzf#vim#ag(<q-args>,
