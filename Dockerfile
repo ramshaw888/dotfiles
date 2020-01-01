@@ -15,6 +15,7 @@ RUN apt-get install -y zsh
 RUN apt-get install -y git
 RUN apt-get install -y curl
 RUN apt-get install -y jq
+RUN apt-get install -y silversearcher-ag
 RUN apt-get install -y --no-install-recommends neovim
 
 RUN apt-get install -y python2.7
@@ -32,8 +33,6 @@ RUN apt-get install -y python3.8-distutils
 
 RUN curl https://bootstrap.pypa.io/get-pip.py | python2.7
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3.8
-
-# RUN apt-get install -y --no-install-recommends gcc
 
 RUN python2.7 -m pip install --user virtualenv
 RUN python3.8 -m pip install --user virtualenv
