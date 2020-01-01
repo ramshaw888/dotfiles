@@ -13,7 +13,7 @@ bindkey '^p' fuzzy_history
 
 # CTRL-F file search
 file_search() {
-  filename=$( find * -type f | fzf +s --tac --preview 'head -n 100 {}' | sed 's/ *[0-9]* *//')
+  filename=$( ag -g . | fzf +s --tac --preview 'head -n 100 {}' | sed 's/ *[0-9]* *//')
   # filename may be empty if user exits fzf without selecting a file
   if [[ ! -z $filename ]]; then
     $EDITOR $filename
