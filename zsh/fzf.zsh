@@ -8,17 +8,6 @@ source "$HOME/.fzf/shell/key-bindings.zsh"
 bindkey '^F' fzf-file-widget
 bindkey '^U' fzf-cd-widget
 
-git_dir_cdup() {
-  dir=$(git rev-parse --show-cdup 2> /dev/null)
-
-  if [[ -z $dir ]] then
-    # Return current directory if there is no repository
-    echo "."
-  else
-    echo $dir
-  fi
-}
-
 export FZF_DEFAULT_COMMAND="ag -g . \$(git_dir_cdup)"  # only filenames
 export FZF_DEFAULT_OPTS="+s --tac --height ${FZF_TMUX_HEIGHT:-75%} +m --reverse"
 
