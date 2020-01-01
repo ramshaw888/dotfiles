@@ -13,7 +13,11 @@ bindkey '^p' fuzzy_history
 
 # CTRL-F file search
 file_search() {
-  vim $( find * -type f | fzf +s --tac | sed 's/ *[0-9]* *//')
+  filename=$( find * -type f | fzf +s --tac | sed 's/ *[0-9]* *//')
+  # filename may be empty if user exits fzf without selecting a file
+  if [[ ! -z $filename ]]; then
+    $EDITOR $filename
+  fi
 }
 zle -N file_search
 bindkey '^f' file_search
