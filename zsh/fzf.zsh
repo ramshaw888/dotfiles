@@ -25,16 +25,8 @@ bindkey '^p' fuzzy_history
 
 # CTRL-Y List all git repositories, and then cd into the selected one
 repo_cd() {
-  top_level_dirs=$( find $CODEDIR -type d -maxdepth 1 )
-
-  # Assume all golang repos will be at level 3 e.g.
-  # src/github.com/ramshaw888/repo_name, probably not the most correct method
-  top_level_dirs+=$( find $GOPATH/src -type d -maxdepth 3 )
-
-  # Only return directories that are git repositories
-  top_level_dirs=$( echo $top_level_dirs | while read dir; do [ -d "$dir/.git" ] && echo $dir ; done )
-  selected_dir=$( echo $top_level_dirs | fzf +s --tac )
-
+  repos=$( lsrepos )
+  selected_dir=$( echo $repos | fzf +s --tac )
   if [[ ! -z $selected_dir ]]; then
     cd $selected_dir
     zle accept-line
