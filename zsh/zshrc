@@ -2,6 +2,7 @@ export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export GIT_EDITOR="$VISUAL"
 alias vim="$VISUAL"
+export CODEDIR="$HOME/code"
 
 source "$HOME/.zsh/history.zsh"
 source "$HOME/.zsh/aliases.zsh"
@@ -47,7 +48,7 @@ RPROMPT=''
 autoload -U compinit && compinit
 zmodload -i zsh/complist
 
-if [ -d "$HOME/code" ]
+if [ -d $CODEDIR ]
 then
-  cd ~/code
+  cd $CODEDIR
 fi
