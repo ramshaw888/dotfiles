@@ -14,7 +14,7 @@ nnoremap <Tab> <C-^><CR>
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 
 function! s:fzfdir() abort
-  let command="ag -g . " . GitDirCdUp()
+  let command="ag -g . " . UserCall("git_dir_cdup")
   let opts = { 'source': command, 'options': ['--preview', 'head -n 100 {}'] }
   call fzf#run(fzf#wrap('FZF', opts))
 endfunction

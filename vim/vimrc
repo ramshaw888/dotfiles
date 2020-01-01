@@ -3,8 +3,8 @@ let g:python_host_prog = '$HOME/.config/py2_venv/bin/python'
 let g:python3_host_prog = '$HOME/.config/py3_venv/bin/python'
 
 " Use current repos virtualenv for ycm if it is found
-exec ':source ' . vimrcdir . 'gitdir.vim'
-let git_dir = GitDir()
+exec ':source ' . vimrcdir . 'usercall.vim'
+let git_dir = UserCall("gitdir")
 if (!empty(git_dir) && filereadable(git_dir . '/.venv/bin/python'))
     let g:ycm_python_binary_path = (git_dir . '/.venv/bin/python')
 else
