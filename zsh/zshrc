@@ -14,12 +14,8 @@ source "$HOME/.zsh/fzf.zsh"
 # version can be used. By default man uses /usr/bin/less.
 export MANPAGER=$(which less)
 
-# All non golang repos in ~/code
-export CDPATH=.:$HOME/code
-
 # Golang specific
 export GOPATH=$HOME/code/go
-export CDPATH=$CDPATH:$GOPATH/src/github.com:$GOPATH/src/golang.org:$GOPATH/src
 
 # Python specific
 export PIP_CACHE_DIR=$HOME/.cache/pip
