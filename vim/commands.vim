@@ -26,7 +26,7 @@ nmap <C-f> :FZ<CR>
 function! s:sinkfn(dirname)
   " cd into the directory, and open the explorer there
   exe 'cd' a:dirname
-  E "a:dirname"
+  exe 'e' a:dirname
 endfunction
 
 " CTRL-Y to open fzf with a list of repositories
