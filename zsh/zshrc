@@ -15,7 +15,9 @@ source "$HOME/.zsh/fzf.zsh"
 export MANPAGER=$(which less)
 
 # Golang specific
-export GOPATH=$HOME/code/go
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$GOBIN
 
 # Python specific
 export PIP_CACHE_DIR=$HOME/.cache/pip
