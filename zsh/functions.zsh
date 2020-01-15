@@ -22,7 +22,7 @@ lsrepos() {
 
   # Assume all golang repos will be at level 3 e.g.
   # src/github.com/ramshaw888/repo_name, probably not the most correct method
-  repos+=$( find $GOPATH/src -type d -maxdepth 3 )
+  repos+="\n$( find $GOPATH/src -type d -maxdepth 3 )"
 
   # Only return directories that are git repositories
   repos=$( echo $repos | while read dir; do [ -d "$dir/.git" ] && echo $dir ; done )
