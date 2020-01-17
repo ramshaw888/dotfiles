@@ -4,6 +4,10 @@ export GIT_EDITOR="$VISUAL"
 alias vim="$VISUAL"
 export CODEDIR="$HOME/code"
 
+# for gpg password caching
+GPG_TTY=$(tty)
+export GPG_TTY
+
 source "$HOME/.zsh/functions.zsh"
 source "$HOME/.zsh/history.zsh"
 source "$HOME/.zsh/aliases.zsh"
