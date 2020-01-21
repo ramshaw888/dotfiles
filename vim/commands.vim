@@ -48,3 +48,4 @@ command! -bang -nargs=* Agg
 nmap <Space> :Agg <CR>
 
 nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
+nmap spew :put = '  \"github.com/davecgh/go-spew/spew\"' <CR>
