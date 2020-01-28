@@ -16,7 +16,7 @@ command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 " CTRL-F to open fzf with the current repository
 function! s:fzfdir() abort
   let command="ag -g . " . UserCall("git_dir_cdup")
-  let opts = { 'source': command, 'options': ['--preview', 'head -n 100 {}'] }
+  let opts = { 'source': command, 'options': [] }
   call fzf#run(fzf#wrap('FZF', opts))
 endfunction
 

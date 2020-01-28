@@ -12,7 +12,7 @@ export FZF_DEFAULT_COMMAND="ag -g . \$(git_dir_cdup)"  # only filenames
 export FZF_DEFAULT_OPTS="+s --tac --height ${FZF_TMUX_HEIGHT:-75%} +m --reverse"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview 'head -n 100 {}'"
+export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 
 # CTRL-P fuzzy history search
 fuzzy_history() {
