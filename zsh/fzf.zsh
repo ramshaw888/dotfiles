@@ -9,7 +9,7 @@ bindkey '^F' fzf-file-widget
 bindkey '^U' fzf-cd-widget
 
 export FZF_DEFAULT_COMMAND="ag -g . \$(git_dir_cdup)"  # only filenames
-export FZF_DEFAULT_OPTS="+s --tac --height ${FZF_TMUX_HEIGHT:-75%} +m --reverse"
+export FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-75%} +m --reverse"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
