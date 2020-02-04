@@ -16,7 +16,8 @@ export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 
 # CTRL-P fuzzy history search
 fuzzy_history() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf | sed 's/ *[0-9]* *//')
+  # +s dont sort the result, --tac reverse the order of input (most recent hist entries first)
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
   zle accept-line
 }
 zle -N fuzzy_history
