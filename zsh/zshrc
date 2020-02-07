@@ -14,6 +14,11 @@ source "$HOME/.zsh/aliases.zsh"
 source "$HOME/.zsh/bindkey.zsh"
 source "$HOME/.zsh/fzf.zsh"
 
+if [ -f $HOME/.selfrc/selfrc.zsh ];
+then
+  source "$HOME/.selfrc/selfrc.zsh"
+fi
+
 # macos default less is built without the lesskey options, instead a brew
 # version can be used. By default man uses /usr/bin/less.
 export MANPAGER=$(which less)
