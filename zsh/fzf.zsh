@@ -35,3 +35,10 @@ repo_cd() {
 }
 zle -N repo_cd
 bindkey '^y' repo_cd
+
+# CTRL-K open diary
+open_diary() {
+  vim $DIARY_FILE
+}
+zle -N open_diary
+bindkey '^k' open_diary
