@@ -20,12 +20,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'keith/Swift.vim', { 'for': 'swift' }
+" Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
 Plug 'ianks/vim-tsx'  " tsx syntax
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
