@@ -28,5 +28,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
 
 call plug#end()

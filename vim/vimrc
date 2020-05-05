@@ -46,7 +46,14 @@ set omnifunc=syntaxcomplete#Complete
 " colorscheme wells-colors
 
 " To match base16 themes
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+"if filereadable(expand("~/.vimrc_background"))
+"  let base16colorspace=256
+"  source ~/.vimrc_background
+"endif
+
+" gruvbox
+set termguicolors
+"set background=dark    " Setting dark mode
+set background=light   " Setting light mode
+let g:gruvbox_contrast_light = 'medium'
+autocmd vimenter * colorscheme gruvbox
