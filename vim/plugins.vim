@@ -22,7 +22,7 @@ Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
-Plug 'ianks/vim-tsx'  " tsx syntax
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'w0rp/ale'
