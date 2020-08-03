@@ -13,7 +13,6 @@ let g:ale_go_gobuild_options = '-i'
 call plug#begin('~/.config/nvim/plugins')
 
 Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3.8 install.py' }
 Plug 'nphoff/wells-colorscheme.vim'
 " assume that fzf has already been installed
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
