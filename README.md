@@ -34,4 +34,5 @@ brew install neovim
 brew install less
 brew install fzf
 brew install gpg
+brew install the_silver_searcher
 ```
