@@ -44,11 +44,6 @@ command! -bang -nargs=* Agg
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
-
-nmap <Leader><Space> :Agg <CR>
-nmap <Space> :GoDecls <CR>
-nmap <Leader>c :GoDeclsDir <CR>
-
 nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
 nmap spew :put = '  \"github.com/davecgh/go-spew/spew\"' <CR>
 

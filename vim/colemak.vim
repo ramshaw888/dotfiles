@@ -41,8 +41,9 @@ nnoremap <C-W>n <C-W>j|xnoremap <C-W>n <C-W>j|
 nnoremap <C-W>e <C-W>k|xnoremap <C-W>e <C-W>k|
 nnoremap <C-W>i <C-W>l|xnoremap <C-W>i <C-W>l|
 
-map <leader>g :YcmCompleter GoToDefinition<CR>
-map <leader>p :YcmCompleter GoToDeclaration<CR>
-map <leader>f :YcmCompleter GoToReferences<CR>
-map <leader>w :YcmCompleter GoTo<CR>
-map <leader>d :YcmCompleter GetDoc<CR>
+map <leader>g <Plug>(coc-definition)
+map <leader>f <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+autocmd FileType go nmap gtt :CocCommand go.tags.add json<cr>
