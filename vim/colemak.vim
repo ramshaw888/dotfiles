@@ -46,4 +46,8 @@ map <leader>f <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 
+nmap <Leader><Space> :Agg <CR>
+nmap <Space> :GoDecls <CR>
+nmap <Leader>c :GoDeclsDir <CR>
+
 autocmd FileType go nmap gtt :CocCommand go.tags.add json<cr>
