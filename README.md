@@ -21,6 +21,7 @@ lesskey -o $HOME/.less lesskey_input
 mkdir $HOME/.config/nvim
 ln -sf $HOME/code/dotfiles/vim $HOME/.vim
 ln -sf $HOME/code/dotfiles/vim/vimrc $HOME/.config/nvim/init.vim
+ln -sf $HOME/code/dotfiles/vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --bin
 ln -sf $HOME/.fzf/bin/fzf /usr/local/bin/fzf
