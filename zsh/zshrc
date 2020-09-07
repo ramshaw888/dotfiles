@@ -26,7 +26,8 @@ export MANPAGER=$(which less)
 # Golang specific
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
-export PATH=$PATH:$GOBIN
+# gcloud components (e.g. cloud_sql_proxy) may be installed to this bin directory. They don't get automatically added to PATH when using the brew installation>
+export PATH=$PATH:$GOBIN:$(gcloud info --format="value(installation.sdk_root)")/bin
 
 # Python specific
 export PIP_CACHE_DIR=$HOME/.cache/pip
