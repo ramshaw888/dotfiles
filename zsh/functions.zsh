@@ -28,3 +28,7 @@ lsrepos() {
   repos=$( echo $repos | while read dir; do [ -d "$dir/.git" ] && echo $dir ; done )
   echo $repos
 }
+
+1p() {
+  eval $(op signin my)
+}
