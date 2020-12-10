@@ -7,7 +7,15 @@ endif
 set nocompatible
 
 " These need to go before ale is loaded
-let g:ale_linters = {'go': ['gotype', 'gometalinter', 'gofmt', 'gobuild', 'goimports']}
+let g:ale_linters = {}
+let g:ale_linters.go = ['gotype', 'gometalinter', 'gofmt', 'gobuild', 'goimports']
+let g:ale_linters.typescript = ['eslint', 'tsserver']
+
+let g:ale_fixers = {'javascript': ['prettier'], 'typescript': ['prettier']}
+
+let g:ale_typescript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
 let g:ale_go_gobuild_options = '-i'
 
 call plug#begin('~/.config/nvim/plugins')
@@ -25,7 +33,7 @@ Plug 'leafgarland/typescript-vim',
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
