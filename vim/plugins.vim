@@ -18,6 +18,9 @@ let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 1
 let g:ale_go_gobuild_options = '-i'
 
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
+
 call plug#begin('~/.config/nvim/plugins')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
