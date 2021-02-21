@@ -1,4 +1,4 @@
-let vimrcdir = '$HOME/.vim/'
+let vimrcdir = '$HOME/.dotfiles/vim/'
 
 " let g:python_host_prog = 'python'
 " let g:python3_host_prog = 'python3'
