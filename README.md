@@ -26,6 +26,8 @@ git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 $HOME/.fzf/install --bin
 ln -sf $HOME/.fzf/bin/fzf /usr/local/bin/fzf
 git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
+
+ln -sf $HOME/code/selfrc $HOME/.selfrc
 ```
 
 ## Mac dependencies

@@ -26,8 +26,7 @@ export MANPAGER=$(which less)
 # Golang specific
 export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
-# gcloud components (e.g. cloud_sql_proxy) may be installed to this bin directory. They don't get automatically added to PATH when using the brew installation>
-export PATH=$PATH:$GOBIN:$(gcloud info --format="value(installation.sdk_root)")/bin
+export PATH=$PATH:$GOBIN
 
 # Python specific
 export PIP_CACHE_DIR=$HOME/.cache/pip
@@ -68,3 +67,12 @@ if [ -d $CODEDIR ]
 then
   cd $CODEDIR
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/code/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/code/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/code/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/code/google-cloud-sdk/completion.zsh.inc"; fi
+
+# gcloud components (e.g. cloud_sql_proxy) may be installed to this bin directory. They don't get automatically added to PATH when using the brew installation>
+export PATH=$PATH:$(gcloud info --format="value(installation.sdk_root)")/bin
