@@ -3,7 +3,11 @@ nnoremap h h|xnoremap h h|onoremap h h|
 nnoremap n j|xnoremap n j|onoremap n j|
 nnoremap e k|xnoremap e k|onoremap e k|
 nnoremap i l|xnoremap i l|onoremap i l|
+
+" k next result
 nnoremap k n|xnoremap k n|onoremap k n|
+" Ctrl-k back result
+nnoremap <C-k> N|xnoremap <C-W>k N|onoremap <C-W>k N|
 
 " inSert/Replace/append
 nnoremap s i|
@@ -40,6 +44,14 @@ nnoremap <C-W>h <C-W>h|xnoremap <C-W>h <C-W>h|
 nnoremap <C-W>n <C-W>j|xnoremap <C-W>n <C-W>j|
 nnoremap <C-W>e <C-W>k|xnoremap <C-W>e <C-W>k|
 nnoremap <C-W>i <C-W>l|xnoremap <C-W>i <C-W>l|
+
+" Clipboard
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+nnoremap <C-p> "+gP
+vnoremap <C-p> "+gP
+
+nnoremap <Tab> <C-^><CR>
 
 map <leader>g <Plug>(coc-definition)
 map <leader>f <Plug>(coc-references)

@@ -3,14 +3,6 @@
 :command W w
 :command Q q
 
-" Clipboard
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-nnoremap <C-p> "+gP
-vnoremap <C-p> "+gP
-
-nnoremap <Tab> <C-^><CR>
-
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
 
 " CTRL-F to open fzf with the current repository
