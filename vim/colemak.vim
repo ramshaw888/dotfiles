@@ -1,8 +1,14 @@
-" Up/down/left/right
+" hnei - Up/down/left/right
 nnoremap h h|xnoremap h h|onoremap h h|
 nnoremap n j|xnoremap n j|onoremap n j|
 nnoremap e k|xnoremap e k|onoremap e k|
 nnoremap i l|xnoremap i l|onoremap i l|
+
+" HNEI - next/back word, up down 10 lines
+nnoremap H b|xnoremap H b|onoremap H b|
+nnoremap I w|xnoremap I w|onoremap I w|
+nnoremap N 10j|xnoremap N 10j|onoremap N 10j|
+nnoremap E 10k|xnoremap E 10k|onoremap E 10k|
 
 " k next result
 nnoremap k n|xnoremap k n|onoremap k n|
@@ -13,10 +19,10 @@ nnoremap <C-k> N|xnoremap <C-W>k N|onoremap <C-W>k N|
 nnoremap s i|
 nnoremap S I|
 
-" Change
-nnoremap w c|xnoremap w c|
-nnoremap W C|xnoremap W C|
-nnoremap ww cc|
+" Change (unused)
+"nnoremap w c|xnoremap w c|
+"nnoremap W C|xnoremap W C|
+"nnoremap ww cc|
 
 " Visual mode
 nnoremap ga gv
