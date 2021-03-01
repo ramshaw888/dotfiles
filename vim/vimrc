@@ -26,6 +26,7 @@ set shiftwidth=2
 set expandtab
 set foldmethod=syntax
 set foldlevelstart=20
+set foldlevel=0
 
 " Show whitespace characters
 set list
