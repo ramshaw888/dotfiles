@@ -4,11 +4,11 @@ nnoremap n j|xnoremap n j|onoremap n j|
 nnoremap e k|xnoremap e k|onoremap e k|
 nnoremap i l|xnoremap i l|onoremap i l|
 
-" HNEI - next/back word, up down 10 lines
+" HNEI - next/back word, up down 6 lines
 nnoremap H b|xnoremap H b|onoremap H b|
 nnoremap I w|xnoremap I w|onoremap I w|
-nnoremap N 10j|xnoremap N 10j|onoremap N 10j|
-nnoremap E 10k|xnoremap E 10k|onoremap E 10k|
+nnoremap N 6j|xnoremap N 6j|onoremap N 6j|
+nnoremap E 6k|xnoremap E 6k|onoremap E 6k|
 
 " k next result
 nnoremap k n|xnoremap k n|onoremap k n|
