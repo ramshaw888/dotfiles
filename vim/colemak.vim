@@ -68,6 +68,7 @@ nmap <Leader><Space> :Agg <CR>
 nmap <Space> :GoDecls <CR>
 nmap <Leader>c :GoDeclsDir <CR>
 nmap <Leader>t :GoAlternate <CR>
+nmap <Leader>i :GoImports<CR>
 
 autocmd FileType go nmap gtt :CocCommand go.tags.add json<cr>
 
