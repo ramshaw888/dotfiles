@@ -77,3 +77,8 @@ if [ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion
 
 # gcloud components (e.g. cloud_sql_proxy) may be installed to this bin directory. They don't get automatically added to PATH when using the brew installation>
 export PATH=$PATH:$(gcloud info --format="value(installation.sdk_root)")/bin
+
+if which helm &> /dev/null
+then
+  echo "yes"
+fi
