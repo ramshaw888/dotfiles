@@ -1,10 +1,3 @@
-:command WQ wq
-:command Wq wq
-:command W w
-:command Q q
-
-command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
-
 " CTRL-F to open fzf with the current repository
 function! s:fzfdir() abort
   let command="ag -g . " . UserCall("git_dir_cdup")
@@ -39,4 +32,30 @@ command! -bang -nargs=* Agg
 nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
 nmap spew :put = '  \"github.com/davecgh/go-spew/spew\"' <CR>
 
+" Restart the go language server
 nmap goboot :call go#lsp#Restart() <CR>
+
+autocmd FileType go nmap gtt :CocCommand go.tags.add json<cr>
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif

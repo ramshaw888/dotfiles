@@ -1,3 +1,6 @@
+" NOTE: This file should be compatible with vanilla vim, should be able to
+" stick this into a remove server wihtout compatibility issues
+
 " hnei - Up/down/left/right
 nnoremap h h|xnoremap h h|onoremap h h|
 nnoremap n j|xnoremap n j|onoremap n j|
@@ -70,27 +73,9 @@ nmap <Leader>c :GoDeclsDir <CR>
 nmap <Leader>t :GoAlternate <CR>
 nmap <Leader>i :GoImports<CR>
 
-autocmd FileType go nmap gtt :CocCommand go.tags.add json<cr>
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
