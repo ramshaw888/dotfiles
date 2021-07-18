@@ -80,5 +80,5 @@ export PATH=$PATH:$(gcloud info --format="value(installation.sdk_root)")/bin
 
 if which helm &> /dev/null
 then
-  echo "yes"
+  source <(helm completion zsh)
 fi
