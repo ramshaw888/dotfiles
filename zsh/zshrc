@@ -8,11 +8,127 @@ export CODEDIR="$HOME/code"
 GPG_TTY=$(tty)
 export GPG_TTY
 
-source "$HOME/.dotfiles/zsh/functions.zsh"
-source "$HOME/.dotfiles/zsh/history.zsh"
-source "$HOME/.dotfiles/zsh/aliases.zsh"
-source "$HOME/.dotfiles/zsh/bindkey.zsh"
-source "$HOME/.dotfiles/zsh/fzf.zsh"
+# FUNCTIONS
+# These functions can be easily used in vimscript by calling
+# system(". $HOME/.zsh/functions.zsh && git_dir_cdup")
+
+git_dir_cdup() {
+  dir=$(git rev-parse --show-cdup 2> /dev/null)
+
+  if [[ -z $dir ]] then
+    # Return current directory if there is no repository
+    echo "."
+  else
+    echo $dir
+  fi
+}
+
+git_dir() {
+  dir=$(git rev-parse --show-toplevel 2> /dev/null)
+  echo $dir
+}
+
+lsrepos() {
+  repos=$( find $CODEDIR -type d -maxdepth 1 )
+
+  # Assume all golang repos will be at level 3 e.g.
+  # src/github.com/ramshaw888/repo_name, probably not the most correct method
+  repos+="\n$( find $GOPATH/src -type d -maxdepth 3 )"
+
+  # Only return directories that are git repositories
+  repos=$( echo $repos | while read dir; do [ -d "$dir/.git" ] && echo $dir ; done )
+  echo $repos
+}
+
+# HISTORY
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=100000
+
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
+# ALIASES
+alias ls='ls -GFh'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git checkout'
+alias gl='git log'
+alias glo='git log --name-only'
+alias gls='git log --pretty=oneline --abbrev-commit'
+alias glg='git log --graph --pretty=oneline --abbrev-commit --all'
+alias gamend='git add --all; git commit --amend'
+alias dev='cd ~/code'
+alias vi='vim'
+alias gt='go test -v ./...'
+
+# BINDKEY
+bindkey -v
+
+# Colemak bindings
+bindkey -M vicmd 'i' vi-forward-char
+bindkey -M vicmd 'h' vi-backward-char
+bindkey -M vicmd 'e' up-history
+bindkey -M vicmd 'n' down-history
+bindkey -M vicmd 'E' up-line-or-history
+bindkey -M vicmd 'N' down-line-or-history
+bindkey -M vicmd 's' vi-insert
+bindkey -M vicmd 'b' vi-backward-word
+bindkey -M vicmd 'k' vi-forward-word
+
+# === FZF ===
+# Auto-completion (vendor)
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings (vendor)
+source "$HOME/.fzf/shell/key-bindings.zsh"
+
+# override default CTRL-T to CTRL-F so we can use the same binding inside vim
+bindkey '^F' fzf-file-widget
+bindkey '^U' fzf-cd-widget
+
+export FZF_DEFAULT_COMMAND="ag -g . \$(git_dir_cdup)"  # only filenames
+export FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-75%} +m --reverse"
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
+
+# CTRL-P fuzzy history search
+fuzzy_history() {
+  # +s dont sort the result, --tac reverse the order of input (most recent hist entries first)
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+  zle accept-line
+}
+zle -N fuzzy_history
+bindkey '^p' fuzzy_history
+
+
+# CTRL-Y List all git repositories, and then cd into the selected one
+repo_cd() {
+  repos=$( lsrepos )
+  selected_dir=$( echo $repos | fzf +s --tac )
+  if [[ ! -z $selected_dir ]]; then
+    cd $selected_dir
+    zle accept-line
+  fi
+}
+zle -N repo_cd
+bindkey '^y' repo_cd
+
+# CTRL-K open diary (from selfrc)
+zle -N diary
+bindkey '^k' diary
 
 if [ -f $HOME/.selfrc/selfrc.zsh ];
 then
