@@ -28,7 +28,7 @@ set foldmethod=syntax
 set foldlevelstart=20
 set foldlevel=0
 set undofile
-set undodir=~/.vimundodir
+set undodir=~/.neovimundodir
 set mmp=5000
 
 " Show whitespace characters
@@ -64,3 +64,22 @@ set termguicolors
 set background=light   " Setting light mode
 let g:gruvbox_contrast_light = 'medium'
 autocmd vimenter * colorscheme gruvbox
+
+" layout for all vim fzf windows
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+

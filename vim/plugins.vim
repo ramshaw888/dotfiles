@@ -25,20 +25,27 @@ call plug#begin('~/.config/nvim/plugins')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
-Plug 'nphoff/wells-colorscheme.vim'
 " assume that fzf has already been installed
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
-Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'keith/Swift.vim', { 'for': 'swift' }
 Plug 'leafgarland/typescript-vim',
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'dense-analysis/ale'
-Plug 'scrooloose/nerdcommenter'
-Plug 'chriskempson/base16-vim'
 Plug 'morhetz/gruvbox'
+Plug 'dense-analysis/ale'
+
+" Plug 'nphoff/wells-colorscheme.vim'
+" Plug 'nvie/vim-flake8'
+" Plug 'keith/Swift.vim', { 'for': 'swift' }
+
+" linters on save
+
+" comment things easily
+" Plug 'scrooloose/nerdcommenter'
+
+" Colour themes - not needed with gruvbox
+" Plug 'chriskempson/base16-vim'
 
 call plug#end()
