@@ -95,6 +95,18 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" COC
+map <leader>g <Plug>(coc-definition)
+map <leader>f <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+nmap <Leader><Space> :Agg <CR>
+nmap <Leader>i :call <C-u>CocCommand editor.action.organizeImport<CR>
+nmap <Space> :CocFzfList commands<CR>
+autocmd FileType go nmap <Leader>t :call <C-u>CocCommand go.test.toggle<CR>
+autocmd FileType go nmap gtt CocCommand go.tags.add<CR>
+
 " vim-gutter settings
 set updatetime=100
 nmap ;] <Plug>(GitGutterNextHunk)
@@ -156,11 +168,6 @@ command! -bang -nargs=* Agg
 
 nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
 nmap spew :put = '  \"github.com/davecgh/go-spew/spew\"' <CR>
-
-" Restart the go language server
-nmap goboot :call go#lsp#Restart() <CR>
-
-autocmd FileType go nmap gtt :CocCommand go.tags.add json<cr>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by

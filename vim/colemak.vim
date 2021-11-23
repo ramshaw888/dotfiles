@@ -62,17 +62,6 @@ vnoremap <C-p> "+gP
 
 nnoremap <Tab> <C-^><CR>
 
-map <leader>g <Plug>(coc-definition)
-map <leader>f <Plug>(coc-references)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gy <Plug>(coc-type-definition)
-
-nmap <Leader><Space> :Agg <CR>
-nmap <Space> :GoDecls <CR>
-nmap <Leader>c :GoDeclsDir <CR>
-nmap <Leader>t :GoAlternate <CR>
-nmap <Leader>i :GoImports<CR>
-
 :command WQ wq
 :command Wq wq
 :command W w
