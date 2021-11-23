@@ -1,3 +1,10 @@
+function! UserCall(cmd)
+  let output = system("source $HOME/.dotfiles/zsh/functions.zsh && " . a:cmd)
+  " Remove the '^@' from the end
+  let output =substitute(output, '.$', '', '')
+  return output
+endfunction
+
 " CTRL-F to open fzf with the current repository
 function! s:fzfdir() abort
   let command="ag -g . " . UserCall("git_dir_cdup")

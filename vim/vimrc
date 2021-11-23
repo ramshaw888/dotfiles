@@ -1,21 +1,7 @@
 let vimrcdir = '$HOME/.dotfiles/vim/'
 
-" let g:python_host_prog = 'python'
-" let g:python3_host_prog = 'python3'
-
-" Use current repos virtualenv for ycm if it is found
-exec ':source ' . vimrcdir . 'usercall.vim'
-let git_dir = UserCall("gitdir")
-if (!empty(git_dir) && filereadable(git_dir . '/.venv/bin/python'))
-    let g:ycm_python_binary_path = (git_dir . '/.venv/bin/python')
-else
-    let g:ycm_python_binary_path = 'python'
-endif
-
 exec ':source ' . vimrcdir . 'colemak.vim'
 exec ':source ' . vimrcdir . 'commands.vim'
-exec ':source ' . vimrcdir . 'gitgutter.vim'
-exec ':source ' . vimrcdir . 'indentation.vim'
 exec ':source ' . vimrcdir . 'plugins.vim'
 
 set t_Co=256
@@ -50,14 +36,6 @@ set clipboard=unnamed
 
 set omnifunc=syntaxcomplete#Complete
 
-" colorscheme wells-colors
-
-" To match base16 themes
-"if filereadable(expand("~/.vimrc_background"))
-"  let base16colorspace=256
-"  source ~/.vimrc_background
-"endif
-
 " gruvbox
 set termguicolors
 "set background=dark    " Setting dark mode
@@ -65,6 +43,7 @@ set background=light   " Setting light mode
 let g:gruvbox_contrast_light = 'medium'
 autocmd vimenter * colorscheme gruvbox
 
+" FZF
 " layout for all vim fzf windows
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
 
@@ -83,3 +62,41 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" vim-gutter settings
+set updatetime=100
+
+nmap ;] <Plug>(GitGutterNextHunk)
+nmap ;[ <Plug>(GitGutterPrevHunk)
+
+nmap <Leader>= <Plug>(GitGutterStageHunk)
+nmap <Leader>- <Plug>(GitGutterUndoHunk)
+nmap <Leader>; <Plug>(GitGutterPreviewHunk)
+
+" indendation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set colorcolumn=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+
+au BufNewFile,BufRead *.swift
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=119 |
+    \ set colorcolumn=119 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+" Dont auto wrap
+set formatoptions-=t

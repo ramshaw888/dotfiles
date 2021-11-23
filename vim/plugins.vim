@@ -23,6 +23,7 @@ let g:go_gopls_gofumpt=1
 
 call plug#begin('~/.config/nvim/plugins')
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 " assume that fzf has already been installed
@@ -35,17 +36,5 @@ Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'morhetz/gruvbox'
 Plug 'dense-analysis/ale'
-
-" Plug 'nphoff/wells-colorscheme.vim'
-" Plug 'nvie/vim-flake8'
-" Plug 'keith/Swift.vim', { 'for': 'swift' }
-
-" linters on save
-
-" comment things easily
-" Plug 'scrooloose/nerdcommenter'
-
-" Colour themes - not needed with gruvbox
-" Plug 'chriskempson/base16-vim'
 
 call plug#end()
