@@ -18,6 +18,27 @@ set hidden " Hides current file when opening explorer
 set backspace=start,eol,indent
 set clipboard=unnamed
 
+" Common whitespace/indentation settings
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+set fileformat=unix
+set textwidth=120
+set colorcolumn=120
+set expandtab
+
+" file type specific overwrites
+au BufNewFile,BufRead *.py set textwidth=79 | set colorcolumn=79 | set expandtab
+au BufNewFile,BufRead *.js set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.jsx set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.ts set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.tsx set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.go set expandtab!
+au BufNewFile,BufRead *.graphqls setfiletype graphql
+au BufNewFile,BufRead *.graphql setfiletype graphql
+au BufNewFile,BufRead *.gql setfiletype graphql
+
 " PLUGINS
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -81,36 +102,6 @@ nmap ;[ <Plug>(GitGutterPrevHunk)
 nmap <Leader>= <Plug>(GitGutterStageHunk)
 nmap <Leader>- <Plug>(GitGutterUndoHunk)
 nmap <Leader>; <Plug>(GitGutterPreviewHunk)
-
-" filetypes, indendation
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set colorcolumn=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-au BufNewFile,BufRead *.js
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
-
-au BufNewFile,BufRead *.swift
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=119 |
-    \ set colorcolumn=119 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-au BufRead,BufNewFile *.graphqls setfiletype graphql
-au BufRead,BufNewFile *.graphql setfiletype graphql
-au BufRead,BufNewFile *.gql setfiletype graphql
 
 " Dont auto wrap
 set formatoptions-=t
