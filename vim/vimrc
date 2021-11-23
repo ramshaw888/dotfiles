@@ -36,6 +36,18 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'airblade/vim-gitgutter'
 call plug#end()
 
+let g:coc_global_extensions = [
+\  'coc-tsserver',
+\  'coc-prettier',
+\  'coc-go',
+\  'coc-sh',
+\  'coc-eslint',
+\  'coc-yaml',
+\  'coc-json',
+\  'coc-toml',
+\  'coc-vimlsp',
+\ ]
+
 " gruvbox
 set termguicolors
 "set background=dark    " Setting dark mode
