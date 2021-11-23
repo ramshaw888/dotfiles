@@ -1,9 +1,7 @@
 let vimrcdir = '$HOME/.dotfiles/vim/'
-
 exec ':source ' . vimrcdir . 'colemak.vim'
 exec ':source ' . vimrcdir . 'commands.vim'
 
-set t_Co=256
 set number
 set mouse=a
 set tabstop=2
@@ -20,7 +18,6 @@ set backupcopy=yes " makes webpack livereload work
 set hidden " Hides current file when opening explorer
 set backspace=start,eol,indent
 set clipboard=unnamed
-set omnifunc=syntaxcomplete#Complete
 
 " PLUGINS
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -110,7 +107,7 @@ set formatoptions-=t
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
-    enable = false
+    enable = true
   },
 }
 EOF
