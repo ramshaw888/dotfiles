@@ -2,7 +2,6 @@ let vimrcdir = '$HOME/.dotfiles/vim/'
 
 exec ':source ' . vimrcdir . 'colemak.vim'
 exec ':source ' . vimrcdir . 'commands.vim'
-exec ':source ' . vimrcdir . 'plugins.vim'
 
 set t_Co=256
 set number
@@ -16,25 +15,29 @@ set foldlevel=0
 set undofile
 set undodir=~/.neovimundodir
 set mmp=5000
-
-" Show whitespace characters
-set list
-
-" makes webpack livereload work
-set backupcopy=yes
-
-" Hides current file when opening explorer
-set hidden
-
-syntax enable
-
-hi Normal ctermbg=none
-
+set list "Show whitespace characters
+set backupcopy=yes " makes webpack livereload work
+set hidden " Hides current file when opening explorer
 set backspace=start,eol,indent
-
 set clipboard=unnamed
-
 set omnifunc=syntaxcomplete#Complete
+
+" PLUGINS
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.config/nvim/plugins')
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf' } " assume that fzf has already been installed
+  Plug 'junegunn/fzf.vim'
+  Plug 'morhetz/gruvbox'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+call plug#end()
 
 " gruvbox
 set termguicolors
@@ -64,15 +67,13 @@ let g:fzf_colors =
 
 " vim-gutter settings
 set updatetime=100
-
 nmap ;] <Plug>(GitGutterNextHunk)
 nmap ;[ <Plug>(GitGutterPrevHunk)
-
 nmap <Leader>= <Plug>(GitGutterStageHunk)
 nmap <Leader>- <Plug>(GitGutterUndoHunk)
 nmap <Leader>; <Plug>(GitGutterPreviewHunk)
 
-" indendation
+" filetypes, indendation
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -98,5 +99,18 @@ au BufNewFile,BufRead *.swift
     \ set autoindent |
     \ set fileformat=unix
 
+au BufRead,BufNewFile *.graphqls setfiletype graphql
+au BufRead,BufNewFile *.graphql setfiletype graphql
+au BufRead,BufNewFile *.gql setfiletype graphql
+
 " Dont auto wrap
 set formatoptions-=t
+
+" treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = false
+  },
+}
+EOF
