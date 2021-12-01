@@ -78,7 +78,8 @@ autocmd vimenter * colorscheme gruvbox
 
 " FZF
 " layout for all vim fzf windows
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true } }
+let g:fzf_layout = { 'down': '30%' }
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -95,17 +96,34 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+let g:coc_fzf_preview = ''
+let g:coc_fzf_opts = []
+
 " COC
 map <leader>g <Plug>(coc-definition)
 map <leader>f <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 
+nmap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute ':vertical h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+nmap <silent> ac  <Plug>(coc-codeaction-selected)
+vmap <silent> ac  <Plug>(coc-codeaction-selected)
+
 nmap <Leader><Space> :Agg <CR>
 nmap <Leader>i :call <C-u>CocCommand editor.action.organizeImport<CR>
 nmap <Space> :CocFzfList commands<CR>
 autocmd FileType go nmap <Leader>t :call <C-u>CocCommand go.test.toggle<CR>
-autocmd FileType go nmap gtt CocCommand go.tags.add<CR>
+autocmd FileType go nmap gtt :call <C-u>CocCommand go.tags.add<CR>
 
 " vim-gutter settings
 set updatetime=100
