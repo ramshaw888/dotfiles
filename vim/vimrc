@@ -19,7 +19,7 @@ set backspace=start,eol,indent
 set clipboard=unnamed
 
 " Common whitespace/indentation settings
-set tabstop=4
+set tabstop=2
 set softtabstop=4
 set shiftwidth=4
 set autoindent
@@ -29,11 +29,11 @@ set colorcolumn=120
 set expandtab
 
 " file type specific overwrites
-au BufNewFile,BufRead *.py set textwidth=79 | set colorcolumn=79 | set expandtab
-au BufNewFile,BufRead *.js set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
-au BufNewFile,BufRead *.jsx set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
-au BufNewFile,BufRead *.ts set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
-au BufNewFile,BufRead *.tsx set tabstop=2 | set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.py set tabstop=4 | set textwidth=79 | set colorcolumn=79 | set expandtab
+au BufNewFile,BufRead *.js set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.jsx set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.ts set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.tsx set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.go set expandtab!
 au BufNewFile,BufRead *.graphqls setfiletype graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
@@ -55,6 +55,7 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'morhetz/gruvbox'
   Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -121,7 +122,9 @@ vmap <silent> ac  <Plug>(coc-codeaction-selected)
 
 nmap <Leader><Space> :Agg <CR>
 nmap <Leader>i :call <C-u>CocCommand editor.action.organizeImport<CR>
-nmap <Space> :CocFzfList commands<CR>
+nmap <Enter> :CocFzfList commands<CR>
+nmap <Space> :GoDecls<CR>
+
 autocmd FileType go nmap <Leader>t :call <C-u>CocCommand go.test.toggle<CR>
 autocmd FileType go nmap gtt :call <C-u>CocCommand go.tags.add<CR>
 
