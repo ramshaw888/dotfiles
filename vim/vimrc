@@ -34,7 +34,7 @@ au BufNewFile,BufRead *.js set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.jsx set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.ts set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.tsx set softtabstop=2 | set shiftwidth=2 | set expandtab
-au BufNewFile,BufRead *.go set expandtab!
+au BufNewFile,BufRead *.go set expandtab! | set tabstop=4
 au BufNewFile,BufRead *.graphqls setfiletype graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
 au BufNewFile,BufRead *.gql setfiletype graphql
