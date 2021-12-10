@@ -21,6 +21,6 @@ lsrepos() {
   repos=$( find $CODEDIR -type d -maxdepth 2 )
 
   # Only return directories that are git repositories
-  repos=$( echo $repos | while read dir; do [ -d "$dir/.git" ] && echo $dir ; done )
+  repos=$( echo $repos | while read dir; do [ -d "$dir/.git" ] && echo ${dir#"$CODEDIR/"}; done )
   echo $repos
 }

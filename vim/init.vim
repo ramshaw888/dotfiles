@@ -168,8 +168,8 @@ nmap <C-f> :FZ<CR>
 
 function! s:sinkfn(dirname)
   " cd into the directory, and open the explorer there
-  exe 'cd' a:dirname
-  exe 'e' a:dirname
+  exe 'cd' "$CODEDIR/" . a:dirname
+  exe 'e' "$CODEDIR/" .a:dirname
 endfunction
 
 " CTRL-Y to open fzf with a list of repositories

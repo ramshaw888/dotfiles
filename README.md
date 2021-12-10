@@ -29,4 +29,5 @@ brew install less
 brew install fzf
 brew install gpg
 brew install the_silver_searcher
+brew install gnu-sed
 ```

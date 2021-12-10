@@ -91,7 +91,7 @@ repo_cd() {
   repos=$( lsrepos )
   selected_dir=$( echo $repos | fzf +s --tac )
   if [[ ! -z $selected_dir ]]; then
-    cd $selected_dir
+    cd $CODEDIR/$selected_dir
     zle accept-line
   fi
 }
