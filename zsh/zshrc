@@ -3,6 +3,7 @@ export EDITOR="$VISUAL"
 export GIT_EDITOR="$VISUAL"
 alias vim="$VISUAL"
 export CODEDIR="$HOME/code"
+export ICLOUDDIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
 # for gpg password caching
 GPG_TTY=$(tty)
