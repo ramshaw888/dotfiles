@@ -11,28 +11,13 @@ These main shortcuts for `fzf` should be implemented in both `zsh` and `vim`.
 - CTRL-Y - cd into a repository
 - CTRL-U - cd into a directory
 
-## Symlinks
+## Setup
 
 ```
 ln -sf $(pwd) $HOME/.dotfiles
 ln -sf $HOME/.dotfiles $HOME/.zshrc
 ln -sf $HOME/.dotfiles/vim $HOME/.config/nvim
 git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
-```
-
-```
-ln -sf $HOME/code/dotfiles/zsh/zshrc $HOME/.zshrc
-ln -sf $HOME/code/dotfiles/zsh $HOME/.zsh
-lesskey -o $HOME/.less lesskey_input
-mkdir $HOME/.config/nvim
-ln -sf $HOME/code/dotfiles/vim $HOME/.vim
-ln -sf $HOME/code/dotfiles/vim/vimrc $HOME/.config/nvim/init.vim
-ln -sf $HOME/code/dotfiles/vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
-git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-$HOME/.fzf/install --bin
-ln -sf $HOME/.fzf/bin/fzf /usr/local/bin/fzf
-git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
-
 ln -sf $HOME/code/selfrc $HOME/.selfrc
 ```
 
