@@ -15,10 +15,10 @@ These main shortcuts for `fzf` should be implemented in both `zsh` and `vim`.
 
 ```
 ln -sf $(pwd) $HOME/.dotfiles
-ln -sf $HOME/.dotfiles $HOME/.zshrc
+ln -sf $HOME/.dotfiles/zsh/zshrc $HOME/.zshrc
 ln -sf $HOME/.dotfiles/vim $HOME/.config/nvim
 git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
-ln -sf $HOME/code/selfrc $HOME/.selfrc
+ln -sf $HOME/code/ramshaw888/selfrc $HOME/.selfrc
 ```
 
 ## Mac dependencies
