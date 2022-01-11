@@ -122,7 +122,7 @@ vmap <silent> ac  <Plug>(coc-codeaction-selected)
 
 nmap <Leader><Space> :Agg <CR>
 nmap <Leader>i :call <C-u>CocCommand editor.action.organizeImport<CR>
-nmap <Enter> :CocFzfList commands<CR>
+"nmap <Enter> :CocFzfList commands<CR>
 nmap <Space> :GoDecls<CR>
 
 autocmd FileType go nmap <Leader>t :call <C-u>CocCommand go.test.toggle<CR>
