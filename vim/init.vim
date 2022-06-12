@@ -34,6 +34,7 @@ au BufNewFile,BufRead *.js set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.jsx set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.ts set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.tsx set softtabstop=2 | set shiftwidth=2 | set expandtab
+au BufNewFile,BufRead *.vim set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.go set expandtab! | set tabstop=4
 au BufNewFile,BufRead *.graphqls setfiletype graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
@@ -56,6 +57,8 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -187,9 +190,6 @@ command! -bang -nargs=* Agg
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
-nmap pdb :put = 'import ipdb; ipdb.set_trace()' <CR>
-nmap spew :put = '  \"github.com/davecgh/go-spew/spew\"' <CR>
-
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -212,3 +212,8 @@ if exists('*complete_info')
 else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
