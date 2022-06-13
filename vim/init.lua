@@ -94,11 +94,11 @@ for _, lsp in pairs({ 'gopls', 'tsserver' }) do
 end
 
 cmp.setup {
-	snippet = {
-		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
-		end,
-	},
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -110,11 +110,11 @@ cmp.setup {
   }),
   sources = {
     { name = 'nvim_lsp' },
-		{ name = "vsnip" },
+    { name = "vsnip" },
   },
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = vim.lsp.buf.formatting_seq_sync,
+  pattern = "*",
+  callback = vim.lsp.buf.formatting_seq_sync,
 })
