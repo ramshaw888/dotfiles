@@ -64,6 +64,8 @@ require('telescope').setup({
   },
 })
 
+require("telescope").load_extension("ui-select") -- for code actions dropdowns
+
 -- Keymaps
 local bufopts = { noremap = true, silent = true }
 vim.keymap.set("n", "<C-f>", builtin.git_files, bufopts)
@@ -81,7 +83,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gi", builtin.lsp_implementations, bufopts)
   vim.keymap.set("n", "gy", builtin.lsp_type_definitions, bufopts)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set({ "n", "x" }, "<leader>ac", ":CodeActionMenu <CR>", bufopts)
+  vim.keymap.set({ "n", "x" }, "<leader>ac", vim.lsp.buf.code_action, bufopts)
 end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())

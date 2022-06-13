@@ -11,12 +11,12 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'airblade/vim-gitgutter'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
-  Plug 'weilbith/nvim-code-action-menu'
 call plug#end()
 
 let vimrcdir = '$HOME/.dotfiles/vim/'
