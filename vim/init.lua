@@ -1,6 +1,5 @@
 vim.cmd("source $HOME/.dotfiles/vim/config.vim")
 
-local telescope = require "telescope"
 local pickers = require "telescope.pickers"
 local builtin = require "telescope.builtin"
 local finders = require "telescope.finders"
@@ -16,6 +15,8 @@ require'nvim-treesitter.configs'.setup {
 
 function _G.repositories(opts)
   opts = opts or {}
+  opts.layout_strategy = "center"
+
   local results = {}
   for i in string.gmatch(vim.call("UserCall", "lsrepos"), "%S+") do
     table.insert(results, i)
@@ -46,12 +47,22 @@ function _G.repositories(opts)
   }):find()
 end
 
-telescope.setup{
+require('telescope').setup({
   pickers = {
-    git_files = { theme = "dropdown" },
-    live_grep = { theme = "dropdown" },
+    git_files = {
+      theme = "dropdown",
+      layout_config = { center = { width = 0.8 } },
+    },
+    live_grep = {
+      theme = "dropdown",
+      layout_config = { center = { width = 0.8 } },
+    },
+    lsp_document_symbols = {
+      theme = "dropdown",
+      layout_config = { center = { width = 0.8 } },
+    },
   },
-}
+})
 
 -- Keymaps
 local bufopts = { noremap = true, silent = true }
