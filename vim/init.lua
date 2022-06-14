@@ -88,7 +88,7 @@ end
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'tsserver' }) do
+for _, lsp in pairs({ 'gopls', 'tsserver', 'terraformls' }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
