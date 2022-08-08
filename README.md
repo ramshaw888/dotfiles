@@ -20,14 +20,3 @@ ln -sf $HOME/.dotfiles/vim $HOME/.config/nvim
 git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
 ln -sf $HOME/code/ramshaw888/selfrc $HOME/.selfrc
 ```
-
-## Mac dependencies
-
-```
-brew install neovim
-brew install less
-brew install fzf
-brew install gpg
-brew install the_silver_searcher
-brew install gnu-sed
-```
