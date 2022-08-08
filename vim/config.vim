@@ -26,7 +26,6 @@ set number
 set mouse=a
 set tabstop=2
 set shiftwidth=2
-set expandtab
 set foldmethod=syntax
 set foldlevelstart=20
 set foldlevel=0
@@ -43,7 +42,7 @@ set autoindent
 set fileformat=unix
 set textwidth=120
 set colorcolumn=120
-set expandtab
+set expandtab!
 
 au BufNewFile,BufRead *.py set tabstop=4 | set textwidth=79 | set colorcolumn=79 | set expandtab
 au BufNewFile,BufRead *.js set softtabstop=2 | set shiftwidth=2 | set expandtab
@@ -52,7 +51,7 @@ au BufNewFile,BufRead *.ts set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.tsx set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.vim set softtabstop=2 | set shiftwidth=2 | set expandtab
 au BufNewFile,BufRead *.lua set softtabstop=2 | set shiftwidth=2 | set expandtab
-au BufNewFile,BufRead *.go set expandtab! | set tabstop=4
+au BufNewFile,BufRead *.go set expandtab! | set tabstop=4 | set shiftwidth=4
 au BufNewFile,BufRead *.graphqls setfiletype graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
 au BufNewFile,BufRead *.gql setfiletype graphql
