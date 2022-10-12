@@ -4,6 +4,7 @@ local pickers = require "telescope.pickers"
 local builtin = require "telescope.builtin"
 local finders = require "telescope.finders"
 local previewers = require "telescope.previewers"
+local layout_strategies = require "telescope.pickers.layout_strategies"
 local conf = require("telescope.config").values
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
@@ -55,7 +56,7 @@ function _G.pgcli_history(opts)
   local results = {}
   local timestamps = {}
   local timestamp = ""
-  for i in string.gmatch(vim.call("UserCall", "tail -n 200 $HOME/.config/pgcli/history"), "[^\r\n]+") do
+  for i in string.gmatch(vim.call("UserCall", "tail -n 10000 $HOME/.config/pgcli/history"), "[^\r\n]+") do
     if startswith(i, "#") then
       timestamp = i:sub(3)
       results[timestamp] = {}
@@ -120,6 +121,10 @@ function _G.pgcli_history(opts)
 end
 
 require('telescope').setup({
+  defaults = {
+    layout_strategy = 'center',
+    layout_config = { height = 0.95 },
+  },
   pickers = {
     git_files = {
       theme = "dropdown",
@@ -130,8 +135,11 @@ require('telescope').setup({
       layout_config = { center = { width = 0.8 } },
     },
     lsp_document_symbols = {
+      show_line = true,
       theme = "dropdown",
-      layout_config = { center = { width = 0.8 } },
+      layout_config = {
+        center = { width = 0.8 },
+      },
     },
   },
 })

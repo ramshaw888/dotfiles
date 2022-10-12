@@ -59,7 +59,7 @@ au BufNewFile,BufRead *.gql setfiletype graphql
 " gruvbox
 set termguicolors
 set background=dark    " Setting dark mode
-set background=light   " Setting light mode
+"set background=light   " Setting light mode
 let g:gruvbox_contrast_light = 'medium'
 autocmd vimenter * colorscheme gruvbox
 
