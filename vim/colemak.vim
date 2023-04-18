@@ -68,3 +68,9 @@ nnoremap <Tab> <C-^><CR>
 :command Q q
 
 command! -nargs=* -bar -bang -count=0 -complete=dir E Explore <args>
+
+iabbrev zdec dec, err := decimal.NewFromString(xxx)<CR>if err != nil {<CR>return nil, errors.Wrap(err, "converting xxx to decimal.Decimal")<esc>kkbveh
+iabbrev zdate dt, err := date.FromString(xxx)<CR>if err != nil {<CR>return nil, errors.Wrap(err, "converting xxx to date.Date")<esc>kkbveh
+iabbrev zuuid id, err := uuid.FromString(xxx)<CR>if err != nil {<CR>return nil, errors.Wrap(err, "converting xxx to uuid.UUID")<esc>kkbveh
+
+nmap <silent> <Leader>y 0/[0-9a-fA-F]\{8}\-[0-9a-fA-F]\{4}\-[0-9a-fA-F]\{4}\-[0-9a-fA-F]\{4}\-[0-9a-fA-F]\{12}<cr>gn

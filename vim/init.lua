@@ -157,7 +157,7 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<leader>ff', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format, bufopts)
   vim.keymap.set("n", "<Space>", builtin.lsp_document_symbols, bufopts)
   vim.keymap.set("n", "<leader>g", builtin.lsp_definitions, bufopts)
   vim.keymap.set("n", "<leader>f", builtin.lsp_references, bufopts)
@@ -167,9 +167,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set({ "n", "x", "v" }, "<leader>ac", vim.lsp.buf.code_action, bufopts)
 end
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'tsserver', 'terraformls', 'tflint', 'yamlls', 'pyright', 'sumneko_lua', 'graphql' }) do
+for _, lsp in pairs({ 'gopls', 'tsserver', 'terraformls', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql' }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -198,8 +198,11 @@ cmp.setup {
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = vim.lsp.buf.formatting_seq_sync,
+	callback = function()
+		vim.lsp.buf.format({
+			buffer = vim.api.nvim_get_current_buf(),
+		})
+	end,
 })
 
 function startswith(text, prefix)
