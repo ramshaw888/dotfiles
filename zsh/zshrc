@@ -1,3 +1,8 @@
+export PYTHON=/opt/homebrew/opt/python@3.10/libexec/bin/python
+export PATH=$PATH:/opt/homebrew/opt/python@3.10/libexec/bin
+
+start_time=$(python -c 'from time import time; print(int(time() * 1000))')
+
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export GIT_EDITOR="$VISUAL"
@@ -10,8 +15,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # for gpg password caching
 GPG_TTY=$(tty)
 export GPG_TTY
-export PYTHON=/opt/homebrew/opt/python@3.10/libexec/bin/python
-export PATH=$PATH:/opt/homebrew/opt/python@3.10/libexec/bin
 
 source "$HOME/.dotfiles/zsh/functions.zsh"
 
@@ -68,10 +71,12 @@ bindkey -M vicmd 's' vi-insert
 bindkey -M vicmd 'b' vi-backward-word
 bindkey -M vicmd 'k' vi-forward-word
 
+
 # === FZF ===
-# Auto-completion (vendor)
-FZF_VERSION=$(brew info fzf --json | jq '.[0].installed[0].version' | tr -d \"\")
-FZF_DIR="$(brew --cellar)/fzf/$FZF_VERSION"
+# Auto-completion (vendor), hardcoded now because these commands are slow
+#FZF_VERSION=$(brew info fzf --json | jq '.[0].installed[0].version' | tr -d \"\")
+# FZF_DIR="$(brew --cellar)/fzf/$FZF_VERSION"
+FZF_DIR=/opt/homebrew/Cellar/fzf/0.42.0
 
 [[ $- == *i* ]] && source "$FZF_DIR/shell/completion.zsh" 2> /dev/null
 
@@ -174,15 +179,35 @@ if [ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.i
 
 # The next line enables shell command completion for gcloud.
 if [ -f "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" ]; then . "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"; fi
-
 # gcloud components (e.g. cloud_sql_proxy) may be installed to this bin directory. They don't get automatically added to PATH when using the brew installation>
-export PATH=$PATH:$(gcloud info --format="value(installation.sdk_root)")/bin
+# Slow so hardcoding this value
+# export PATH=$PATH:$(gcloud info --format="value(installation.sdk_root)")/bin
+export PATH=$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
 if which helm &> /dev/null
 then
   source <(helm completion zsh)
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+load-nvm() {
+  unset -f node nvm npm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+}
+node() {
+  load-nvm
+  node $@
+}
+npm() {
+  load-nvm
+  npm $@
+}
+nvm() {
+  load-nvm
+  nvm $@
+}
+
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# for profiling
+end_time=$(python -c 'from time import time; print(int(time() * 1000))')
