@@ -207,6 +207,9 @@ nvm() {
   nvm $@
 }
 
+# default node bins
+export PATH=/Users/ramshaw/.nvm/versions/node/v16.13.1/bin:$PATH
+
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # for profiling
