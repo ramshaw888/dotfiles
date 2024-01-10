@@ -1,5 +1,5 @@
-export PYTHON=/opt/homebrew/opt/python@3.10/libexec/bin/python
-export PATH=$PATH:/opt/homebrew/opt/python@3.10/libexec/bin
+export PYTHON=/opt/homebrew/opt/python@3.11libexec/bin/python
+export PATH=$PATH:/opt/homebrew/opt/python@3.11/libexec/bin
 
 start_time=$(python -c 'from time import time; print(int(time() * 1000))')
 
@@ -56,6 +56,7 @@ alias gamend='git add --all; git commit --amend'
 alias dev='cd ~/code'
 alias vi='vim'
 alias gt='go test -v ./...'
+alias psql='pgcli'
 
 # BINDKEY
 bindkey -v
@@ -147,8 +148,8 @@ export PIP_CACHE_DIR=$HOME/.cache/pip
 # allow easy base16 switching
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
-  [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-    eval "$("$BASE16_SHELL/profile_helper.sh")"
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
 
 # promptinit - custom prompts, as customised below
 autoload -Uz promptinit; promptinit
@@ -211,6 +212,9 @@ nvm() {
 export PATH=/Users/ramshaw/.nvm/versions/node/v16.13.1/bin:$PATH
 
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+export PATH=/opt/homebrew/opt/libpq/bin:$PATH
+export GOPRIVATE=github.com/spaceship-fspl
 
 # for profiling
 end_time=$(python -c 'from time import time; print(int(time() * 1000))')

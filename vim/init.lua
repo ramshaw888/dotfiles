@@ -124,6 +124,10 @@ require('telescope').setup({
   defaults = {
     layout_strategy = 'center',
     layout_config = { height = 0.95 },
+    path_display = { 'truncate' }
+  },
+  vimgrep_arguments = {
+    'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '-C', '10'
   },
   pickers = {
     git_files = {
@@ -133,6 +137,13 @@ require('telescope').setup({
     live_grep = {
       theme = "dropdown",
       layout_config = { center = { width = 0.8 } },
+    },
+    lsp_references = {
+      theme = "dropdown",
+      show_line = true,
+      layout_config = {
+        center = { width = 0.9 },
+      },
     },
     lsp_document_symbols = {
       show_line = true,
@@ -169,7 +180,7 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'tsserver', 'terraformls', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql' }) do
+for _, lsp in pairs({ 'gopls', 'tsserver', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql' }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -198,11 +209,11 @@ cmp.setup {
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		vim.lsp.buf.format({
-			buffer = vim.api.nvim_get_current_buf(),
-		})
-	end,
+  callback = function()
+    vim.lsp.buf.format({
+      buffer = vim.api.nvim_get_current_buf(),
+    })
+  end,
 })
 
 function startswith(text, prefix)
