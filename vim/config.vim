@@ -17,7 +17,8 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
-  Plug 'github/copilot.vim'
+  Plug 'zbirenbaum/copilot.lua'
+  Plug 'zbirenbaum/copilot-cmp'
 call plug#end()
 
 let vimrcdir = '$HOME/.dotfiles/vim/'
