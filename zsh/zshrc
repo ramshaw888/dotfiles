@@ -83,7 +83,13 @@ bindkey -M vicmd 'k' vi-forward-word
 # Auto-completion (vendor), hardcoded now because these commands are slow
 #FZF_VERSION=$(brew info fzf --json | jq '.[0].installed[0].version' | tr -d \"\")
 # FZF_DIR="$(brew --cellar)/fzf/$FZF_VERSION"
+#
 FZF_DIR=/opt/homebrew/Cellar/fzf/0.42.0
+
+if [ -d "$FZF_DIR" ]; then
+else
+  FZF_DIR=/usr/local/Cellar/fzf/0.32.0
+fi
 
 [[ $- == *i* ]] && source "$FZF_DIR/shell/completion.zsh" 2> /dev/null
 
