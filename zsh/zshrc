@@ -88,7 +88,12 @@ FZF_DIR=/opt/homebrew/Cellar/fzf/0.42.0
 [[ $- == *i* ]] && source "$FZF_DIR/shell/completion.zsh" 2> /dev/null
 
 # Key bindings (vendor)
-source "$FZF_DIR/shell/key-bindings.zsh"
+if [[ -f "$FZF_DIR/shell/key-bindings.zsh" ]]; then
+  source "$FZF_DIR/shell/key-bindings.zsh"
+else
+  echo "key-bindings.zsh not found in $FZF_DIR/shell"
+fi
+
 
 # override default CTRL-T to CTRL-F so we can use the same binding inside vim
 bindkey '^F' fzf-file-widget
