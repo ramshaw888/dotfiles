@@ -18,5 +18,5 @@ ln -sf $(pwd) $HOME/.dotfiles
 ln -sf $HOME/.dotfiles/zsh/zshrc $HOME/.zshrc
 ln -sf $HOME/.dotfiles/vim $HOME/.config/nvim
 git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
-ln -sf $HOME/code/ramshaw888/selfrc $HOME/.selfrc
+ln -sf $HOME/go/src/github.com/ramshaw888/selfrc $HOME/.selfrc
 ```

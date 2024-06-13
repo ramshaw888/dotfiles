@@ -57,7 +57,15 @@ alias glo='git log --name-only'
 alias gls='git log --pretty=oneline --abbrev-commit'
 alias glg='git log --graph --pretty=oneline --abbrev-commit --all'
 alias gp='git push origin HEAD'
-alias gm='git checkout master && git fetch && git reset --hard origin/master'
+alias gm='
+  function _gm() {
+    if git show-ref --quiet refs/heads/main; then
+      BRANCH=main
+    else
+      BRANCH=master
+    fi
+    git checkout $BRANCH && git fetch && git reset --hard origin/$BRANCH
+  }; _gm'
 alias gamend='git add --all; git commit --amend'
 alias dev='cd ~/code'
 alias vi='vim'
