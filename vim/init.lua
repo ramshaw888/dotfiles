@@ -196,7 +196,7 @@ for _, lsp in pairs({ 'gopls', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql
   }
 end
 
-local tsserver_settings = {
+local ts_ls_settings = {
   inlayHints = {
     includeInlayParameterNameHints = "all",
     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -209,12 +209,12 @@ local tsserver_settings = {
     includeCompletionsForModuleExports = false,
   },
 }
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
-    typescript = tsserver_settings,
-    javascript = tsserver_settings,
+    typescript = ts_ls_settings,
+    javascript = ts_ls_settings,
   },
 })
 
