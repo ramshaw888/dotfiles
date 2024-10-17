@@ -10,6 +10,7 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local lspconfig = require 'lspconfig'
 local cmp = require 'cmp'
+local prettierd = require("efmls-configs.formatters.prettier_d")
 
 require 'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
@@ -158,10 +159,10 @@ require('telescope').setup({
 require("telescope").load_extension("ui-select") -- for code actions dropdowns
 
 -- Disable default copilot plugin in favour of copilot-cmp
-require("copilot").setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-})
+--require("copilot").setup({
+--  suggestion = { enabled = false },
+--  panel = { enabled = false },
+--})
 
 require("copilot_cmp").setup()
 
@@ -188,12 +189,52 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'tsserver', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql' }) do
+for _, lsp in pairs({ 'gopls', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql' }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
+
+local tsserver_settings = {
+  inlayHints = {
+    includeInlayParameterNameHints = "all",
+    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+    includeInlayFunctionParameterTypeHints = true,
+    includeInlayVariableTypeHints = true,
+    includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+    includeInlayPropertyDeclarationTypeHints = true,
+    includeInlayFunctionLikeReturnTypeHints = true,
+    includeInlayEnumMemberValueHints = true,
+    includeCompletionsForModuleExports = false,
+  },
+}
+lspconfig.tsserver.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    typescript = tsserver_settings,
+    javascript = tsserver_settings,
+  },
+})
+
+lspconfig.efm.setup({
+  init_options = {
+    documentFormatting = true,
+  },
+  settings = {
+    languages = {
+      graphql = { prettierd },
+      jsonc = { prettierd },
+      json = { prettierd },
+      html = { prettierd },
+      typescriptreact = { prettierd },
+      typescript = { prettierd },
+      markdown = { prettierd },
+      javascript = { prettierd },
+    },
+  },
+})
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
@@ -234,6 +275,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     vim.lsp.buf.format({
       buffer = vim.api.nvim_get_current_buf(),
+      filter = function(client)
+        return client.name ~= "tsserver" and client.name ~= "eslint"
+      end,
     })
   end,
 })

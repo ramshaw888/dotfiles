@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'hrsh7th/vim-vsnip'
   Plug 'zbirenbaum/copilot.lua'
   Plug 'zbirenbaum/copilot-cmp'
+  Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' }
 call plug#end()
 
 let vimrcdir = '$HOME/.dotfiles/vim/'
