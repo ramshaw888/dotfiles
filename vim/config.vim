@@ -20,6 +20,8 @@ call plug#begin('~/.config/nvim/plugins')
   Plug 'zbirenbaum/copilot.lua'
   Plug 'zbirenbaum/copilot-cmp'
   Plug 'creativenull/efmls-configs-nvim', { 'tag': 'v1.*' }
+  Plug 'nvim-tree/nvim-web-devicons'
+  Plug 'folke/trouble.nvim'
 call plug#end()
 
 let vimrcdir = '$HOME/.dotfiles/vim/'

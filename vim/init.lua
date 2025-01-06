@@ -178,53 +178,9 @@ vim.keymap.set("n", "<C-s>", builtin.live_grep, bufopts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
 
--- Add a new keymap to expand current line's diagnostics into a split
-vim.keymap.set('n', '<leader>de', function()
-    -- Get diagnostics for current line
-    local diagnostics = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+require('trouble').setup()
 
-    -- Create new split
-    vim.cmd('botright split')
-    local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_win_set_buf(0, buf)
-
-    -- Format and insert diagnostics
-    local lines = {}
-    for _, d in ipairs(diagnostics) do
-        -- Split message on newlines and add each line
-        local message_lines = vim.split(d.message, '\n', true)
-        local source = d.source and ('(' .. d.source .. ')') or ''
-
-        -- Add first line with severity and source
-        table.insert(lines, string.format("[%s] %s %s", d.severity, message_lines[1], source))
-
-        -- Add remaining lines indented
-        for i = 2, #message_lines do
-            table.insert(lines, "    " .. message_lines[i])
-        end
-
-        -- If there's detailed related information, add it
-        if d.relatedInformation then
-            for _, info in ipairs(d.relatedInformation) do
-                local info_lines = vim.split(info.message, '\n', true)
-                for _, line in ipairs(info_lines) do
-                    table.insert(lines, '  → ' .. line)
-                end
-            end
-        end
-
-        -- Add a blank line between different diagnostics
-        table.insert(lines, "")
-    end
-
-    -- Set lines in buffer
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-
-    -- Make it non-modifiable
-    vim.bo[buf].modifiable = false
-    vim.bo[buf].buftype = 'nofile'
-    vim.bo[buf].filetype = 'DiagnosticExpand'
-end, bufopts)
+vim.keymap.set('n', '<leader>st', '<cmd>Trouble diagnostics<cr>', bufopts)
 
 local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
