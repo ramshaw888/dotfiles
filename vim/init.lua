@@ -175,12 +175,11 @@ vim.keymap.set("n", "<C-y>", repositories, bufopts)
 vim.keymap.set("n", "<C-t>", pgcli_history, bufopts)
 vim.keymap.set("n", "<C-s>", builtin.live_grep, bufopts)
 
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
+vim.keymap.set('n', 's[', vim.diagnostic.goto_prev, bufopts)
+vim.keymap.set('n', 's]', vim.diagnostic.goto_next, bufopts)
 
 require('trouble').setup()
-
-vim.keymap.set('n', '<leader>st', '<cmd>Trouble diagnostics<cr>', bufopts)
+vim.keymap.set('n', '[st', '<cmd>Trouble diagnostics<cr>', bufopts)
 
 local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -250,7 +249,7 @@ vim.diagnostic.config({
     border = "rounded",
     source = true,
     width = 120,
-    max_width = 500,
+    max_width = 800,
     max_height = 100,
     wrap = true,
     style = "minimal",
@@ -306,3 +305,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 function startswith(text, prefix)
   return text:find(prefix, 1, true) == 1
 end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    -- Reset problematic highlight groups to use gruvbox colors
+    vim.api.nvim_set_hl(0, "NormalFloat", { link = "GruvboxYellowSign" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { link = "GruvboxYellowSign" })
+  end,
+})
+
+vim.opt.termguicolors = true
+vim.opt.background = 'light' -- or dark
+vim.g.gruvbox_contrast_light = 'medium'
+vim.cmd.colorscheme('gruvbox')

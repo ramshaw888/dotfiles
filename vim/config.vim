@@ -61,13 +61,6 @@ au BufNewFile,BufRead *.graphqls setfiletype graphql
 au BufNewFile,BufRead *.graphql setfiletype graphql
 au BufNewFile,BufRead *.gql setfiletype graphql
 
-" gruvbox
-set termguicolors
-set background=dark    " Setting dark mode
-set background=light   " Setting light mode
-let g:gruvbox_contrast_light = 'medium'
-autocmd vimenter * colorscheme gruvbox
-
 autocmd FileType go nmap <Leader>t :call <C-u>CocCommand go.test.toggle<CR>
 autocmd FileType go nmap gtt :call <C-u>CocCommand go.tags.add<CR>
 
