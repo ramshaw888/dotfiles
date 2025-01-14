@@ -166,6 +166,10 @@ require("telescope").load_extension("ui-select") -- for code actions dropdowns
 --  panel = { enabled = false },
 --})
 
+require("copilot").setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+})
 require("copilot_cmp").setup()
 
 -- Keymaps
