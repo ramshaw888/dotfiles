@@ -22,5 +22,5 @@ lsrepos() {
 
   # Only return directories that are git repositories
   repos=$( echo $repos | while read dir; do [ -d "$dir/.git" ] && echo ${dir#"$CODEDIR/"}; done )
-  echo $repos
+  echo $repos"\n"$(extraRepos)
 }
