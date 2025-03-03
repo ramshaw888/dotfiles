@@ -174,7 +174,10 @@ require("copilot_cmp").setup()
 
 -- Keymaps
 local bufopts = { noremap = true, silent = true }
-vim.keymap.set("n", "<C-f>", builtin.git_files, bufopts)
+vim.keymap.set("n", "<C-f>", function()
+  builtin.git_files({ show_untracked = true })
+end, bufopts)
+vim.keymap.set("n", "<C-p>", builtin.git_status, bufopts)
 vim.keymap.set("n", "<C-y>", repositories, bufopts)
 vim.keymap.set("n", "<C-t>", pgcli_history, bufopts)
 vim.keymap.set("n", "<C-s>", builtin.live_grep, bufopts)
