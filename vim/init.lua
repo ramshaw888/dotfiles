@@ -179,8 +179,8 @@ vim.keymap.set("n", "<C-y>", repositories, bufopts)
 vim.keymap.set("n", "<C-t>", pgcli_history, bufopts)
 vim.keymap.set("n", "<C-s>", builtin.live_grep, bufopts)
 
-vim.keymap.set('n', 's[', vim.diagnostic.goto_prev, bufopts)
-vim.keymap.set('n', 's]', vim.diagnostic.goto_next, bufopts)
+vim.keymap.set('n', 't[', vim.diagnostic.goto_prev, bufopts)
+vim.keymap.set('n', 't]', vim.diagnostic.goto_next, bufopts)
 
 require('trouble').setup()
 vim.keymap.set('n', '[st', '<cmd>Trouble diagnostics<cr>', bufopts)
