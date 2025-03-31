@@ -12,7 +12,7 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local lspconfig = require 'lspconfig'
 local cmp = require 'cmp'
-local prettierd = require("efmls-configs.formatters.prettier_d")
+local biome = require("efmls-configs.formatters.biome")
 
 require 'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
@@ -239,14 +239,14 @@ lspconfig.efm.setup({
   },
   settings = {
     languages = {
-      graphql = { prettierd },
-      jsonc = { prettierd },
-      json = { prettierd },
-      html = { prettierd },
-      typescriptreact = { prettierd },
-      typescript = { prettierd },
-      markdown = { prettierd },
-      javascript = { prettierd },
+      graphql = { biome },
+      jsonc = { biome },
+      json = { biome },
+      html = { biome },
+      typescriptreact = { biome },
+      typescript = { biome },
+      markdown = { biome },
+      javascript = { biome },
     },
   },
 })
