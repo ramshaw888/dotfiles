@@ -212,18 +212,47 @@ for _, lsp in pairs({ 'gopls', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql
 end
 
 local ts_ls_settings = {
-  inlayHints = {
-    includeInlayParameterNameHints = "all",
-    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-    includeInlayFunctionParameterTypeHints = true,
-    includeInlayVariableTypeHints = true,
-    includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-    includeInlayPropertyDeclarationTypeHints = true,
-    includeInlayFunctionLikeReturnTypeHints = true,
-    includeInlayEnumMemberValueHints = true,
-    includeCompletionsForModuleExports = false,
-  },
+ inlayHints = {
+   -- Controls parameter name hints display
+   -- "literals": only shows for literal arguments (strings, numbers, etc.)
+   -- "all": shows for all arguments
+   -- "none": disables parameter name hints
+   includeInlayParameterNameHints = "literals",
+
+   -- When true, shows parameter name hints even when the argument
+   -- variable name is identical to the parameter name
+   includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+
+   -- Displays the type of parameters in function calls
+   -- e.g., function(param: string)
+   includeInlayFunctionParameterTypeHints = true,
+
+   -- Shows inferred types for variables
+   -- e.g., const x: number = 5
+   includeInlayVariableTypeHints = false,
+
+   -- Shows variable type hints even when the variable name
+   -- suggests its type (e.g., showing `: string` for `userName`)
+   includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+
+   -- Shows inferred types for property declarations in objects and classes
+   -- e.g., class { prop: number; }
+   includeInlayPropertyDeclarationTypeHints = false,
+
+   -- Displays return types for functions where they aren't explicitly specified
+   -- e.g., function(): string { return "hello" }
+   includeInlayFunctionLikeReturnTypeHints = true,
+
+   -- Shows the numeric values of enum members inline with their definitions
+   -- e.g., enum Color { Red = 0, Green = 1 }
+   includeInlayEnumMemberValueHints = false,
+
+   -- When false, doesn't automatically offer completions for exports from modules
+   -- (can reduce noise in autocomplete suggestions)
+   includeCompletionsForModuleExports = false,
+ },
 }
+
 lspconfig.ts_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
@@ -231,6 +260,16 @@ lspconfig.ts_ls.setup({
     typescript = ts_ls_settings,
     javascript = ts_ls_settings,
   },
+  init_options = {
+    maxTsServerMemory = 4096,
+    tsserver = {
+      logVerbosity = "off",
+      useSyntaxServer = "auto"
+    }
+  },
+  flags = {
+    debounce_text_changes = 150,
+  }
 })
 
 lspconfig.efm.setup({
