@@ -204,12 +204,21 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'tflint', 'yamlls', 'pyright', 'lua_ls', 'graphql' }) do
+for _, lsp in pairs({ 'gopls', 'tflint', 'yamlls', 'pyright', 'lua_ls' }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
+
+-- GraphQL language server with specific file extension support
+lspconfig.graphql.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "graphql", "typescriptreact", "javascriptreact" },
+  root_dir = lspconfig.util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
+  cmd = { "graphql-lsp", "server", "-m", "stream" }
+}
 
 local ts_ls_settings = {
  inlayHints = {
@@ -286,6 +295,7 @@ lspconfig.efm.setup({
       typescript = { biome },
       markdown = { biome },
       javascript = { biome },
+      javascriptreact = { biome },
     },
   },
 })
