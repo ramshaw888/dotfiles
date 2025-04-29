@@ -166,11 +166,11 @@ require("telescope").load_extension("ui-select") -- for code actions dropdowns
 --  panel = { enabled = false },
 --})
 
-require("copilot").setup({
-  suggestion = { enabled = false },
-  panel = { enabled = false },
-})
-require("copilot_cmp").setup()
+--require("copilot").setup({
+--  suggestion = { enabled = false },
+--  panel = { enabled = false },
+--})
+--require("copilot_cmp").setup()
 
 -- Keymaps
 local bufopts = { noremap = true, silent = true }
@@ -341,7 +341,7 @@ cmp.setup {
     end),
   }),
   sources = {
-    { name = "copilot" },
+    --{ name = "copilot" },
     { name = 'nvim_lsp' },
     { name = "vsnip" },
   },
