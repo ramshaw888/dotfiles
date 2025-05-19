@@ -13,6 +13,7 @@ local action_state = require "telescope.actions.state"
 local lspconfig = require 'lspconfig'
 local cmp = require 'cmp'
 local biome = require("efmls-configs.formatters.biome")
+require 'lsp_timing'
 
 require 'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
