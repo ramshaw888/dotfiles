@@ -23,6 +23,7 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 source "$HOME/.dotfiles/zsh/functions.zsh"
+source "$HOME/.dotfiles/zsh/bells.zsh"
 
 # HISTORY
 HISTFILE=~/.histfile
