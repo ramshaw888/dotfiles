@@ -12,8 +12,14 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local lspconfig = require 'lspconfig'
 local cmp = require 'cmp'
-local biome = require("efmls-configs.formatters.biome")
 require 'lsp_timing'
+
+-- forked from creativenull/efmls-configs-nvim biome config
+local biome = {
+  formatCommand = "npx @biomejs/biome format --stdin-file-path='${INPUT}'",
+  formatStdin = true,
+  rootMarkers = { 'rome.json', 'biome.json', 'package.json' },
+}
 
 require 'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
