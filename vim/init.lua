@@ -359,7 +359,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({
       buffer = vim.api.nvim_get_current_buf(),
       filter = function(client)
-        return client.name ~= "tsserver" and client.name ~= "eslint"
+        return client.name ~= "tsserver" and client.name ~= "eslint" and client.name ~= "ts_ls"
       end,
     })
   end,
