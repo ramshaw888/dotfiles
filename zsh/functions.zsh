@@ -45,5 +45,5 @@ findreplace() {
     # First show which files will be affected (preview) using ag
     echo "Files that will be modified:"
     ag -l "$search_pattern" "$current_dir"
-    ag -l "$search_pattern" "$current_dir" | xargs perl -i -pe "s/$search_pattern/$replace_text/g"
+    ag -l "$search_pattern" "$current_dir" | xargs sed -i '' "s|$(printf '%s\n' "$search_pattern" | sed 's/[[\.*^$()+?{|]/\\&/g')|$(printf '%s\n' "$replace_text" | sed 's/[[\.*^$()+?{|]/\\&/g')|g"
 }
