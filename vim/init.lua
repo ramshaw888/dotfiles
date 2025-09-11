@@ -2,7 +2,7 @@ vim.loader.enable()  -- Enable native loader for faster startups
 
 -- Enable LSP debug logging
 -- tail -f ~/.local/state/nvim/lsp.log
- vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 vim.cmd("source $HOME/.dotfiles/vim/config.vim")
 
