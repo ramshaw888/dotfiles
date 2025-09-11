@@ -1,7 +1,8 @@
 vim.loader.enable()  -- Enable native loader for faster startups
 
 -- Enable LSP debug logging
-vim.lsp.set_log_level("debug")
+-- tail -f ~/.local/state/nvim/lsp.log
+-- vim.lsp.set_log_level("debug")
 
 vim.cmd("source $HOME/.dotfiles/vim/config.vim")
 
@@ -15,15 +16,7 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local lspconfig = require 'lspconfig'
 local cmp = require 'cmp'
-require 'lsp_timing'
-
--- forked from creativenull/efmls-configs-nvim biome config
-local biome = {
-  formatCommand = "npx @biomejs/biome format --stdin-file-path='${INPUT}'",
-  formatCanRange = true,
-  formatStdin = true,
-  rootMarkers = { 'rome.json', 'biome.json', 'package.json' },
-}
+--require 'lsp_timing'
 
 require 'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
@@ -301,6 +294,7 @@ lspconfig.ts_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   on_init = function(client)
+    -- disable ts_ls formatting in favour of biome
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end,
@@ -367,55 +361,10 @@ cmp.setup {
   },
 }
 
---vim.api.nvim_create_autocmd("BufWritePre", {
---  callback = function()
---    vim.lsp.buf.format({
---      buffer = vim.api.nvim_get_current_buf(),
---      async = false,  -- Make it synchronous
---      filter = function(client)
---        return client.name ~= "tsserver" and client.name ~= "eslint" and client.name ~= "ts_ls"
---      end,
---    })
---  end,
---})
-
---vim.api.nvim_create_autocmd("BufWritePre", {
---  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
---  callback = function()
---    -- Only format with EFM (Biome), filter out other LSP clients
---    local clients = vim.lsp.get_clients({ bufnr = 0 })
---    print("Active LSP clients:")
---    for _, client in ipairs(clients) do
---      print("  - " .. client.name)
---      if client.name == "efm" then
---        print("Using EFM (Biome) for formatting")
---        break
---      end
---    end
---
---    vim.lsp.buf.format({ 
---      async = false,
---      --filter = function(c) return c.name == "efm" end
---    })
---  end,
---})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
-    local clients = vim.lsp.get_clients({ bufnr = 0 })
-    print("Active LSP clients for formatting:")
-    for _, client in ipairs(clients) do
-      local can_format = client.server_capabilities.documentFormattingProvider
-      print("  - " .. client.name .. " (formatting: " .. tostring(can_format) .. ")")
-    end
-    
-    vim.lsp.buf.format({ 
-      async = false,
-      filter = function(client)
-        print("Trying to format with: " .. client.name)
-        return true
-      end
-    })
+    vim.lsp.buf.format({ async = false })
   end,
 })
 
