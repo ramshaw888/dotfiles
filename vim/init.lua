@@ -2,7 +2,7 @@ vim.loader.enable()  -- Enable native loader for faster startups
 
 -- Enable LSP debug logging
 -- tail -f ~/.local/state/nvim/lsp.log
--- vim.lsp.set_log_level("debug")
+ vim.lsp.set_log_level("debug")
 
 vim.cmd("source $HOME/.dotfiles/vim/config.vim")
 
@@ -224,29 +224,15 @@ lspconfig.graphql.setup {
   cmd = { "graphql-lsp", "server", "-m", "stream" }
 }
 
--- Biome LSP server for formatting and linting
-local function has_biome()
-  local handle = io.popen("npx biome --version 2>/dev/null")
-  if handle then
-    local result = handle:read("*a")
-    handle:close()
-    return result and result:match("%S") ~= nil
-  end
-  return false
-end
-
-if has_biome() then
-  lspconfig.biome.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'npx', 'biome', 'lsp-proxy' },
-    root_dir = function(fname)
-      local root_files = { 'biome.json', 'biome.jsonc' }
-      root_files = lspconfig.util.insert_package_json(root_files, 'biome', fname)
-      return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
-    end,
-  }
-end
+lspconfig.biome.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = function(fname)
+    local root_files = { 'biome.json', 'biome.jsonc' }
+    root_files = lspconfig.util.insert_package_json(root_files, 'biome', fname)
+    return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+  end,
+}
 
 local ts_ls_settings = {
  inlayHints = {
@@ -297,6 +283,23 @@ lspconfig.ts_ls.setup({
     -- disable ts_ls formatting in favour of biome
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
+  end,
+  on_exit = function(code, signal, client_id)
+    local client = vim.lsp.get_client_by_id(client_id)
+    local client_name = client and client.name or "ts_ls"
+
+    if code ~= 0 or signal ~= 0 then
+      vim.notify(
+        string.format("TypeScript language server (%s) crashed! Exit code: %d, Signal: %d",
+                     client_name, code, signal),
+        vim.log.levels.ERROR
+      )
+    else
+      vim.notify(
+        string.format("TypeScript language server (%s) exited normally", client_name),
+        vim.log.levels.INFO
+      )
+    end
   end,
   settings = {
     typescript = ts_ls_settings,
