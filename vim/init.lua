@@ -1,5 +1,8 @@
 vim.loader.enable()  -- Enable native loader for faster startups
 
+-- Enable LSP debug logging
+vim.lsp.set_log_level("debug")
+
 vim.cmd("source $HOME/.dotfiles/vim/config.vim")
 
 local pickers = require "telescope.pickers"
@@ -17,6 +20,7 @@ require 'lsp_timing'
 -- forked from creativenull/efmls-configs-nvim biome config
 local biome = {
   formatCommand = "npx @biomejs/biome format --stdin-file-path='${INPUT}'",
+  formatCanRange = true,
   formatStdin = true,
   rootMarkers = { 'rome.json', 'biome.json', 'package.json' },
 }
@@ -211,7 +215,7 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'tflint', 'yamlls', 'pyright', 'lua_ls' }) do
+for _, lsp in pairs({ 'gopls', 'yamlls', 'pyright', 'lua_ls' }) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -226,6 +230,30 @@ lspconfig.graphql.setup {
   root_dir = lspconfig.util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
   cmd = { "graphql-lsp", "server", "-m", "stream" }
 }
+
+-- Biome LSP server for formatting and linting
+local function has_biome()
+  local handle = io.popen("npx biome --version 2>/dev/null")
+  if handle then
+    local result = handle:read("*a")
+    handle:close()
+    return result and result:match("%S") ~= nil
+  end
+  return false
+end
+
+if has_biome() then
+  lspconfig.biome.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { 'npx', 'biome', 'lsp-proxy' },
+    root_dir = function(fname)
+      local root_files = { 'biome.json', 'biome.jsonc' }
+      root_files = lspconfig.util.insert_package_json(root_files, 'biome', fname)
+      return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+    end,
+  }
+end
 
 local ts_ls_settings = {
  inlayHints = {
@@ -272,6 +300,10 @@ local ts_ls_settings = {
 lspconfig.ts_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  on_init = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
   settings = {
     typescript = ts_ls_settings,
     javascript = ts_ls_settings,
@@ -286,25 +318,6 @@ lspconfig.ts_ls.setup({
   flags = {
     debounce_text_changes = 150,
   }
-})
-
-lspconfig.efm.setup({
-  init_options = {
-    documentFormatting = true,
-  },
-  settings = {
-    languages = {
-      graphql = { biome },
-      jsonc = { biome },
-      json = { biome },
-      html = { biome },
-      typescriptreact = { biome },
-      typescript = { biome },
-      markdown = { biome },
-      javascript = { biome },
-      javascriptreact = { biome },
-    },
-  },
 })
 
 vim.diagnostic.config({
@@ -354,13 +367,54 @@ cmp.setup {
   },
 }
 
+--vim.api.nvim_create_autocmd("BufWritePre", {
+--  callback = function()
+--    vim.lsp.buf.format({
+--      buffer = vim.api.nvim_get_current_buf(),
+--      async = false,  -- Make it synchronous
+--      filter = function(client)
+--        return client.name ~= "tsserver" and client.name ~= "eslint" and client.name ~= "ts_ls"
+--      end,
+--    })
+--  end,
+--})
+
+--vim.api.nvim_create_autocmd("BufWritePre", {
+--  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+--  callback = function()
+--    -- Only format with EFM (Biome), filter out other LSP clients
+--    local clients = vim.lsp.get_clients({ bufnr = 0 })
+--    print("Active LSP clients:")
+--    for _, client in ipairs(clients) do
+--      print("  - " .. client.name)
+--      if client.name == "efm" then
+--        print("Using EFM (Biome) for formatting")
+--        break
+--      end
+--    end
+--
+--    vim.lsp.buf.format({ 
+--      async = false,
+--      --filter = function(c) return c.name == "efm" end
+--    })
+--  end,
+--})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
-    vim.lsp.buf.format({
-      buffer = vim.api.nvim_get_current_buf(),
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    print("Active LSP clients for formatting:")
+    for _, client in ipairs(clients) do
+      local can_format = client.server_capabilities.documentFormattingProvider
+      print("  - " .. client.name .. " (formatting: " .. tostring(can_format) .. ")")
+    end
+    
+    vim.lsp.buf.format({ 
+      async = false,
       filter = function(client)
-        return client.name ~= "tsserver" and client.name ~= "eslint" and client.name ~= "ts_ls"
-      end,
+        print("Trying to format with: " .. client.name)
+        return true
+      end
     })
   end,
 })
