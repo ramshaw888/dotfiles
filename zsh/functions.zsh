@@ -47,3 +47,8 @@ findreplace() {
     ag -l "$search_pattern" "$current_dir"
     ag -l "$search_pattern" "$current_dir" | xargs sed -i '' "s|$(printf '%s\n' "$search_pattern" | sed 's/[[\.*^$()+?{|]/\\&/g')|$(printf '%s\n' "$replace_text" | sed 's/[[\.*^$()+?{|]/\\&/g')|g"
 }
+
+gstats() {
+    local days=${1:-90}
+    git shortlog -sn --since="$days days ago"
+}
