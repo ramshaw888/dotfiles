@@ -14,11 +14,10 @@ local layout_strategies = require "telescope.pickers.layout_strategies"
 local conf = require("telescope.config").values
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
-local lspconfig = require 'lspconfig'
 local cmp = require 'cmp'
 --require 'lsp_timing'
 
-require 'nvim-treesitter.configs'.setup {
+require('nvim-treesitter').setup {
   highlight = { enable = true },
 }
 
@@ -208,31 +207,20 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in pairs({ 'gopls', 'yamlls', 'pyright', 'lua_ls' }) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
-
--- GraphQL language server with specific file extension support
-lspconfig.graphql.setup {
-  on_attach = on_attach,
+vim.lsp.config('*', {
   capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+vim.lsp.config('graphql', {
   filetypes = { "graphql", "typescriptreact", "javascriptreact" },
-  root_dir = lspconfig.util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*'),
-  cmd = { "graphql-lsp", "server", "-m", "stream" }
-}
+  root_markers = { '.graphqlrc', '.graphqlrc.js', '.graphqlrc.ts', '.graphqlrc.yml', '.graphqlrc.yaml', '.graphqlrc.json', '.graphqlrc.toml', '.graphql.config.js', '.graphql.config.ts', 'graphql.config.js', 'graphql.config.ts' },
+  cmd = { "graphql-lsp", "server", "-m", "stream" },
+})
 
-lspconfig.biome.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  root_dir = function(fname)
-    local root_files = { 'biome.json', 'biome.jsonc' }
-    root_files = lspconfig.util.insert_package_json(root_files, 'biome', fname)
-    return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
-  end,
-}
+vim.lsp.config('biome', {
+  root_markers = { 'biome.json', 'biome.jsonc' },
+})
 
 local ts_ls_settings = {
  inlayHints = {
@@ -276,11 +264,8 @@ local ts_ls_settings = {
  },
 }
 
-lspconfig.ts_ls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+vim.lsp.config('ts_ls', {
   on_init = function(client)
-    -- disable ts_ls formatting in favour of biome
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end,
@@ -316,6 +301,8 @@ lspconfig.ts_ls.setup({
     debounce_text_changes = 150,
   }
 })
+
+vim.lsp.enable({ 'gopls', 'yamlls', 'pyright', 'lua_ls', 'graphql', 'biome', 'ts_ls' })
 
 vim.diagnostic.config({
   float = {
