@@ -222,6 +222,13 @@ vim.lsp.config('graphql', {
 
 vim.lsp.config('biome', {
   root_markers = { 'biome.json', 'biome.jsonc' },
+  -- Use the native binary directly rather than node_modules/.bin/biome (a shell->node shim).
+  -- The shim doesn't forward SIGTERM, causing orphaned biome servers that accumulate memory.
+  -- Update the version string when bumping @biomejs/biome in the project.
+  cmd = function(dispatchers, config)
+    local cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.pnpm/@biomejs+cli-darwin-arm64@2.4.0/node_modules/@biomejs/cli-darwin-arm64/biome')
+    return vim.lsp.rpc.start({ cmd, 'lsp-proxy' }, dispatchers)
+  end,
 })
 
 local ts_ls_settings = {
@@ -357,6 +364,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
   callback = function()
     vim.lsp.buf.format({ async = false })
+  end,
+})
+
+-- Kill orphaned biome lsp-proxy processes left over from crashed/killed neovim sessions.
+-- These accumulate because iTerm SIGHUP kills neovim without giving it a chance to clean up.
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.fn.jobstart("pkill -f 'biome lsp-proxy'", { detach = true })
+  end,
+})
+
+-- Stop biome LSP clients before neovim exits so lsp-proxy disconnects cleanly,
+-- triggering --stop-on-disconnect on the biome server.
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    vim.lsp.stop_client(vim.lsp.get_clients({ name = "biome" }), true)
   end,
 })
 
