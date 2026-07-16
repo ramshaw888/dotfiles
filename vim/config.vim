@@ -48,6 +48,7 @@ set fileformat=unix
 set textwidth=120
 set colorcolumn=120
 set expandtab!
+set diffopt+=vertical
 
 au BufNewFile,BufRead *.py set tabstop=4 | set textwidth=79 | set colorcolumn=79 | set expandtab
 au BufNewFile,BufRead *.js set softtabstop=2 | set shiftwidth=2 | set expandtab
