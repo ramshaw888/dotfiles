@@ -73,6 +73,9 @@ alias vi='vim'
 alias gt='go test -v ./...'
 alias psql='pgcli'
 
+alias mullvad-start='sudo launchctl enable system/net.mullvad.daemon && sudo launchctl bootstrap system /Library/LaunchDaemons/net.mullvad.daemon.plist'
+alias mullvad-stop='sudo launchctl bootout system /Library/LaunchDaemons/net.mullvad.daemon.plist && sudo launchctl disable system/net.mullvad.daemon'
+
 # BINDKEY
 bindkey -v
 
