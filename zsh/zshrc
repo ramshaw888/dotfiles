@@ -216,8 +216,14 @@ nvm() {
   nvm $@
 }
 
-# default node bins
-export PATH=$HOME/.nvm/versions/node/v24.15.0/bin:$PATH
+# default node bins: newest installed version matching nvm's default alias
+# (e.g. "24" → v24.22.2), without loading nvm
+if [[ -r $HOME/.nvm/alias/default ]]; then
+  _nvm_default=$(<$HOME/.nvm/alias/default)
+  _nvm_dirs=($HOME/.nvm/versions/node/v${_nvm_default#v}(|.*)(N/nOn))
+  (( $#_nvm_dirs )) && export PATH=$_nvm_dirs[1]/bin:$PATH
+  unset _nvm_default _nvm_dirs
+fi
 
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
