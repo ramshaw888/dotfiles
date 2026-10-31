@@ -55,6 +55,105 @@ function _G.repositories(opts)
   }):find()
 end
 
+function _G.named_document_symbols(opts)
+  opts = opts or {}
+
+  local entry_display = require("telescope.pickers.entry_display")
+  local displayer = entry_display.create {
+    separator = " ",
+    items = {
+      { width = 10 },
+      { remaining = true },
+    },
+  }
+  local make_display = function(entry)
+    return displayer { entry.symbol_type:lower(), entry.symbol_name }
+  end
+
+  opts.entry_maker = function(entry)
+    local symbol_type, symbol_name = entry.text:match("%[(.+)%]%s+(.*)")
+    -- tsserver/typescript-language-server names anonymous/arrow functions
+    -- (and other closures) with a placeholder like "<function>", and inline
+    -- callback args (e.g. "foo.map() callback") with a "... callback" suffix
+    if
+      not symbol_name
+      or symbol_name == ""
+      or symbol_name:match("^<.*>$")
+      or symbol_name:match("callback$")
+    then
+      return nil
+    end
+
+    local kind_lower = symbol_type and symbol_type:lower()
+    if kind_lower == "variable" or kind_lower == "constant" then
+      -- variable/constant kind catches React components declared as
+      -- `const Foo: FC<Props> = (...) => {...}`; only keep PascalCase
+      -- names (component convention) so plain variables stay excluded
+      if not symbol_name:match("^%u") then
+        return nil
+      end
+    end
+    return {
+      value = entry,
+      ordinal = symbol_name,
+      display = make_display,
+      filename = entry.filename,
+      lnum = entry.lnum,
+      col = entry.col,
+      symbol_name = symbol_name,
+      -- needed by telescope's prefilter_sorter, which tags entries by this field
+      symbol_type = symbol_type,
+    }
+  end
+
+  builtin.lsp_document_symbols(opts)
+end
+
+function _G.custom_filelist(opts)
+  opts = opts or {}
+  opts.layout_strategy = "center"
+
+  local results = {}
+  local f = io.popen("git diff --name-only origin/main 2>/dev/null")
+  if f then
+    for line in f:lines() do
+      if line ~= "" then
+        table.insert(results, line)
+      end
+    end
+    f:close()
+  end
+
+  if #results == 0 then
+    vim.notify("git diff origin/main returned no files", vim.log.levels.WARN)
+    return
+  end
+
+  pickers.new(opts, {
+    prompt_title = "filelist",
+    sorter = conf.generic_sorter(opts),
+    previewer = conf.file_previewer(opts),
+    finder = finders.new_table {
+      results = results,
+      entry_maker = function(entry)
+        return {
+          value = entry,
+          filename = entry,
+          display = entry,
+          ordinal = entry,
+        }
+      end,
+    },
+    attach_mappings = function(_, map)
+      actions.select_default:replace(function(prompt_bufnr)
+        actions.close(prompt_bufnr)
+        vim.cmd("edit " .. vim.fn.fnameescape(action_state.get_selected_entry().value))
+      end)
+      return true
+    end,
+  }):find()
+end
+
 function _G.pgcli_history(opts)
   opts = opts or {}
   opts.layout_strategy = "vertical"
@@ -154,6 +253,7 @@ require('telescope').setup({
     lsp_document_symbols = {
       show_line = true,
       theme = "dropdown",
+      symbols = { "function", "method", "variable", "constant" },
       layout_config = {
         center = { width = 0.8 },
       },
@@ -186,6 +286,7 @@ vim.keymap.set("n", "<C-t>", function()
 end, bufopts)
 vim.keymap.set("n", "<C-y>", repositories, bufopts)
 vim.keymap.set("n", "<C-s>", builtin.live_grep, bufopts)
+vim.keymap.set("n", "<leader>l", custom_filelist, bufopts)
 
 vim.keymap.set('n', 't[', vim.diagnostic.goto_prev, bufopts)
 vim.keymap.set('n', 't]', vim.diagnostic.goto_next, bufopts)
@@ -198,7 +299,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format, bufopts)
-  vim.keymap.set("n", "<Space>", builtin.lsp_document_symbols, bufopts)
+  vim.keymap.set("n", "<Space>", named_document_symbols, bufopts)
   vim.keymap.set("n", "<leader>g", builtin.lsp_definitions, bufopts)
   vim.keymap.set("n", "<leader>f", builtin.lsp_references, bufopts)
   vim.keymap.set("n", "gi", builtin.lsp_implementations, bufopts)
