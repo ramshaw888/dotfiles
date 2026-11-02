@@ -57,6 +57,7 @@ end
 
 function _G.named_document_symbols(opts)
   opts = opts or {}
+  local bufnr = vim.api.nvim_get_current_buf()
 
   local entry_display = require("telescope.pickers.entry_display")
   local displayer = entry_display.create {
@@ -88,8 +89,14 @@ function _G.named_document_symbols(opts)
     if kind_lower == "variable" or kind_lower == "constant" then
       -- variable/constant kind catches React components declared as
       -- `const Foo: FC<Props> = (...) => {...}`; only keep PascalCase
-      -- names (component convention) so plain variables stay excluded
-      if not symbol_name:match("^%u") then
+      -- names (component convention) so plain variables stay excluded.
+      -- Also keep `const foo = async (...) =>` / `= function` style functions.
+      local line = vim.api.nvim_buf_get_lines(bufnr, entry.lnum - 1, entry.lnum, false)[1] or ""
+      local is_fn_assignment = line:match("=%s*async[%s(<]")
+        or line:match("=%s*function[%s(*]")
+        or line:match("=%s*%(")
+        or line:match("=%s*<")
+      if not symbol_name:match("^%u") and not is_fn_assignment then
         return nil
       end
     end
