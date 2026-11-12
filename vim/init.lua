@@ -475,19 +475,33 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- Kill orphaned biome lsp-proxy processes left over from crashed/killed neovim sessions.
--- These accumulate because iTerm SIGHUP kills neovim without giving it a chance to clean up.
+-- Clean up biome processes left over from crashed/killed neovim sessions (iTerm SIGHUP skips cleanup).
+-- Only orphaned lsp-proxies (reparented to launchd) are killed, so other open sessions keep their LSP.
+-- The biome server daemonizes and outlives neovim, so kill it only when no other nvim is running.
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    vim.fn.jobstart("pkill -f 'biome lsp-proxy'", { detach = true })
+    vim.fn.jobstart({ "pkill", "-P", "1", "-f", "biome lsp-proxy" }, { detach = true })
+    local nvims = vim.fn.systemlist({ "pgrep", "-f", "nvim --embed" })
+    if #nvims <= 1 then
+      vim.fn.jobstart({ "pkill", "-f", "biome __run_server" }, { detach = true })
+    end
   end,
 })
 
--- Stop biome LSP clients before neovim exits so lsp-proxy disconnects cleanly,
--- triggering --stop-on-disconnect on the biome server.
+-- Stop biome gracefully (shutdown/exit handshake) so the server sees a clean disconnect and
+-- --stop-on-disconnect can fire. A forced stop skips the handshake and leaves the server running.
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
-    vim.lsp.stop_client(vim.lsp.get_clients({ name = "biome" }), true)
+    local clients = vim.lsp.get_clients({ name = "biome" })
+    vim.lsp.stop_client(clients)
+    vim.wait(500, function()
+      for _, client in ipairs(clients) do
+        if not client:is_stopped() then
+          return false
+        end
+      end
+      return true
+    end, 10)
   end,
 })
 
